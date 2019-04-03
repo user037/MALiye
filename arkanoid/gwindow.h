@@ -15,7 +15,7 @@ class gWindow : public QGraphicsView
 public:
     explicit gWindow(QWidget *parent = nullptr);
 
-    void addBrick(point pos, point sz);
+    void addBrick(point pos, point sz, int id);
     void addPlatform();
     void redrawBricks();
     void redrawPlate(); //plate = platform

@@ -13,9 +13,9 @@ gWindow::gWindow(QWidget *parent) : QGraphicsView(parent)
     brickPen.setColor(Qt::red);
 }
 
-void gWindow::addBrick(point pos, point sz)
+void gWindow::addBrick(point pos, point sz, int id)
 {
-    bricks.push_back(new brick(pos, sz));
+    bricks.push_back(new brick(pos, sz, id));
 }
 
 void gWindow::addPlatform()

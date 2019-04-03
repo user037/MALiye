@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         for(int j = 1; j <= 5; j++)
         {
-            ui->graphicsView->addBrick({105*i-25,55*j},{100,50});
+            ui->graphicsView->addBrick({105*i-25,55*j},{100,50}, 1);
         }
     }
     ui->graphicsView->addPlatform();
