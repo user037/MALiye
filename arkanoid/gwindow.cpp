@@ -22,3 +22,8 @@ void gWindow::redrawBricks()
         qDebug() << i->getSize().x << " " << i->getSize().y;
     }
 }
+
+brick* gWindow::getBrick(int i)
+{
+    return this->bricks[i];
+}

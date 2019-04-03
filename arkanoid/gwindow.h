@@ -16,9 +16,10 @@ public:
 
     void addBrick(point pos, point sz);
     void redrawBricks();
+    brick* getBrick(int i);
 private:
     QGraphicsScene *scene;
-    QVector<brick*> bricks;
+    QVector < brick* > bricks;
     QPen brickPen;
 signals:
 
