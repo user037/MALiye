@@ -20,7 +20,12 @@ point brick::getSize()
     return this->size;
 }
 
-brick::brick(point pos, point sz, QGraphicsItem *parent) : QGraphicsItem(parent)
+int brick::getId()
+{
+    return this->id;
+}
+
+brick::brick(point pos, point sz, int id, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
     this->pos = pos;
     this->size = sz;
@@ -29,4 +34,12 @@ brick::brick(point pos, point sz, QGraphicsItem *parent) : QGraphicsItem(parent)
 void brick::setPos(point newPos)
 {
     this->pos = newPos;
+}
+
+void brick::hit()
+{
+    if(this->id > 0)
+    {
+        --this->id;
+    }
 }

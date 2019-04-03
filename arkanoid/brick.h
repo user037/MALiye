@@ -6,16 +6,20 @@
 
 class brick : public QGraphicsItem
 {
-private:
-    point pos;
-    point size;
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
 public:
     point getPos();
     point getSize();
-    brick(point pos, point sz, QGraphicsItem *parent = nullptr);
+    int getId();
+    brick(point pos, point sz, int id, QGraphicsItem *parent = nullptr);
     void setPos(point newPos);
+    void hit();
+private:
+    point pos;
+    point size;
+    int id;
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
+
 };
 
 #endif // BRICK_H
