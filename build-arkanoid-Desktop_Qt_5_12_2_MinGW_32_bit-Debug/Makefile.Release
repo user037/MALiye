@@ -357,6 +357,9 @@ release/moc_mainwindow.cpp: ../arkanoid/mainwindow.h \
 		../../Qt/5.12.2/mingw73_32/include/QtGui/qtouchdevice.h \
 		../../Qt/5.12.2/mingw73_32/include/QtWidgets/qtabwidget.h \
 		../../Qt/5.12.2/mingw73_32/include/QtGui/qicon.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/QTimer \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qtimer.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qbasictimer.h \
 		release/moc_predefs.h \
 		../../Qt/5.12.2/mingw73_32/bin/moc.exe
 	C:\Qt\5.12.2\mingw73_32\bin\moc.exe $(DEFINES) --include C:/MALiye/build-arkanoid-Desktop_Qt_5_12_2_MinGW_32_bit-Debug/release/moc_predefs.h -IC:/Qt/5.12.2/mingw73_32/mkspecs/win32-g++ -IC:/MALiye/arkanoid -IC:/Qt/5.12.2/mingw73_32/include -IC:/Qt/5.12.2/mingw73_32/include/QtWidgets -IC:/Qt/5.12.2/mingw73_32/include/QtGui -IC:/Qt/5.12.2/mingw73_32/include/QtANGLE -IC:/Qt/5.12.2/mingw73_32/include/QtCore -I. -IC:/Qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32 -IC:/Qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_32/i686-w64-mingw32/include ..\arkanoid\mainwindow.h -o release\moc_mainwindow.cpp
@@ -913,6 +916,9 @@ release/main.o: ../arkanoid/main.cpp ../arkanoid/mainwindow.h \
 		../../Qt/5.12.2/mingw73_32/include/QtGui/qtouchdevice.h \
 		../../Qt/5.12.2/mingw73_32/include/QtWidgets/qtabwidget.h \
 		../../Qt/5.12.2/mingw73_32/include/QtGui/qicon.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/QTimer \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qtimer.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qbasictimer.h \
 		../../Qt/5.12.2/mingw73_32/include/QtWidgets/QApplication \
 		../../Qt/5.12.2/mingw73_32/include/QtWidgets/qapplication.h \
 		../../Qt/5.12.2/mingw73_32/include/QtCore/qcoreapplication.h \
@@ -1029,6 +1035,9 @@ release/mainwindow.o: ../arkanoid/mainwindow.cpp ../arkanoid/mainwindow.h \
 		../../Qt/5.12.2/mingw73_32/include/QtGui/qtouchdevice.h \
 		../../Qt/5.12.2/mingw73_32/include/QtWidgets/qtabwidget.h \
 		../../Qt/5.12.2/mingw73_32/include/QtGui/qicon.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/QTimer \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qtimer.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qbasictimer.h \
 		ui_mainwindow.h \
 		../../Qt/5.12.2/mingw73_32/include/QtCore/QVariant \
 		../../Qt/5.12.2/mingw73_32/include/QtWidgets/QApplication \
@@ -1149,7 +1158,96 @@ release/platform.o: ../arkanoid/platform.cpp ../arkanoid/platform.h \
 		../arkanoid/tools.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\platform.o ..\arkanoid\platform.cpp
 
-release/ball.o: ../arkanoid/ball.cpp ../arkanoid/ball.h
+release/ball.o: ../arkanoid/ball.cpp ../arkanoid/ball.h \
+		../../Qt/5.12.2/mingw73_32/include/QtWidgets/QGraphicsItem \
+		../../Qt/5.12.2/mingw73_32/include/QtWidgets/qgraphicsitem.h \
+		../../Qt/5.12.2/mingw73_32/include/QtWidgets/qtwidgetsglobal.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qtguiglobal.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qglobal.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qconfig-bootstrapped.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qconfig.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qtcore-config.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qsystemdetection.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qprocessordetection.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qcompilerdetection.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qtypeinfo.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qsysinfo.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qlogging.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qflags.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qatomic.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qbasicatomic.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qatomic_bootstrap.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qgenericatomic.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qatomic_cxx11.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qatomic_msvc.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qglobalstatic.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qmutex.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qnumeric.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qversiontagging.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qtgui-config.h \
+		../../Qt/5.12.2/mingw73_32/include/QtWidgets/qtwidgets-config.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qobject.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qobjectdefs.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qnamespace.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qobjectdefs_impl.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qstring.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qchar.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qbytearray.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qrefcount.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qarraydata.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qstringliteral.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qstringalgorithms.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qstringview.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qstringbuilder.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qlist.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qalgorithms.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qiterator.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qhashfunctions.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qpair.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qbytearraylist.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qstringlist.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qregexp.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qstringmatcher.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qcoreevent.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qscopedpointer.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qmetatype.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qvarlengtharray.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qcontainerfwd.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qobject_impl.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qvariant.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qmap.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qdebug.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qhash.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qtextstream.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qiodevice.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qlocale.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qshareddata.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qvector.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qpoint.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qset.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qcontiguouscache.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qsharedpointer.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qsharedpointer_impl.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qrect.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qmargins.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qsize.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qpainterpath.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qmatrix.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qpolygon.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qregion.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qwindowdefs.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qwindowdefs_win.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qdatastream.h \
+		../../Qt/5.12.2/mingw73_32/include/QtCore/qline.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qpixmap.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qpaintdevice.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qcolor.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qrgb.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qrgba64.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qimage.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qpixelformat.h \
+		../../Qt/5.12.2/mingw73_32/include/QtGui/qtransform.h \
+		../arkanoid/tools.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\ball.o ..\arkanoid\ball.cpp
 
 release/moc_gwindow.o: release/moc_gwindow.cpp 

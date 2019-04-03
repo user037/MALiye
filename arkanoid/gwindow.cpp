@@ -18,8 +18,8 @@ void gWindow::redrawBricks()
     for(auto i : bricks)
     {
         scene->addRect(i->getPos().x, i->getPos().y, i->getSize().x, i->getSize().y, brickPen);
-        qDebug() << i->getPos().x << " " << i->getPos().y;
-        qDebug() << i->getSize().x << " " << i->getSize().y;
+        qDebug() << i->getPos().x << " " << i->getPos().y; //debug
+        qDebug() << i->getSize().x << " " << i->getSize().y; //debug
     }
 }
 
