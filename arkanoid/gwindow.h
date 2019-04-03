@@ -22,6 +22,7 @@ public:
     void totalRedraw();
     int bricksCount();
     brick* getBrick(int i);
+    platform *platf;
 private:
     QGraphicsScene *scene;
     QGraphicsItemGroup *group_blocks;
@@ -29,7 +30,6 @@ private:
     QGraphicsItemGroup *group_balls;
     QVector < brick* > bricks;
     QPen brickPen;
-    platform *platf;
 signals:
 
 public slots:

@@ -17,7 +17,7 @@ public:
     void move(bool dir);
 
 private:
-    point pos = {325,500};
+    point pos;
     point size = {150,25};
     point maxPos;
     point minPos;

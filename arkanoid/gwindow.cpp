@@ -20,7 +20,7 @@ void gWindow::addBrick(point pos, point sz, int id)
 
 void gWindow::addPlatform()
 {
-    platf = new platform();
+    platf = new platform({325,500},{800-160,600-25},{0,0}, 15);
 }
 
 void gWindow::redrawBricks()

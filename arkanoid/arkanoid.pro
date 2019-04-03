@@ -31,7 +31,8 @@ SOURCES += \
         gwindow.cpp \
         main.cpp \
         mainwindow.cpp \
-        platform.cpp
+        platform.cpp \
+        player.cpp
 
 HEADERS += \
         ball.h \
