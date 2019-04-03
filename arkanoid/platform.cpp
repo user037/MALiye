@@ -9,9 +9,12 @@ void platform::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 }
 
-platform::platform()
+platform::platform(point pos, point maxPos, point minPos, int velocity, QGraphicsItem *parent) : QGraphicsItem(parent)
 {
-
+    this->pos = pos;
+    this->maxPos = maxPos;
+    this->minPos = minPos;
+    this->velocity = velocity;
 }
 
 point platform::getPos()

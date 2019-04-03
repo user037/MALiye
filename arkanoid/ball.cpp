@@ -20,6 +20,12 @@ point ball::getVelocity()
     return this->velocity;
 }
 
+ball::ball(point pos, point velocity, QGraphicsItem *parent) : QGraphicsItem(parent)
+{
+    this->pos = pos;
+    this->velocity = velocity;
+}
+
 void ball::move()
 {
     this->pos.x += this->velocity.x;
