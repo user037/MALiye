@@ -4,20 +4,20 @@
 #include <QGraphicsItem>
 #include <tools.h>
 
-class player : public QGraphicsItem
+class player : QGraphicsItem
 {
 public:
-    int getHighScore();
     int getCurScore();
+    int getHighScore();
     int getHp();
     int getLevel();
-    player(int highScore, int curScore, int hp, int level, QGraphicsItem *parent = nullptr);
+    player(int curScore, int highScore, int hp, int level, QWidget *widget = nullptr);
     void changeLevel(int newLevel);
     void death();
     void damage();
 private:
-    int highScore;
     int curScore;
+    int highScore;
     int hp;
     int level;
     QRectF boundingRect() const;
