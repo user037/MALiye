@@ -16,6 +16,7 @@ public:
 
     void addBrick(point pos, point sz);
     void redrawBricks();
+    int bricksCount();
     brick* getBrick(int i);
 private:
     QGraphicsScene *scene;

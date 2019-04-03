@@ -25,27 +25,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        ball.cpp \
         brick.cpp \
         gobject.cpp \
         gwindow.cpp \
         main.cpp \
         mainwindow.cpp \
-    platform.cpp \
-    ball.cpp \
-    player.cpp
+        platform.cpp
 
 HEADERS += \
+        ball.h \
         brick.h \
         gobject.h \
         gwindow.h \
         mainwindow.h \
-        tools.h \
-    platform.h \
-    ball.h \
-    player.h
+        platform.h \
+        tools.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        menu.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
