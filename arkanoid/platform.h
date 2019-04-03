@@ -9,6 +9,7 @@ class platform : public QGraphicsItem
 public:
     platform();
     point getPos();
+    point getSize();
     point getMaxPos();
     point getMinPos();
     int getVelocity();
@@ -16,7 +17,8 @@ public:
     void move(bool dir);
 
 private:
-    point pos;
+    point pos = {325,500};
+    point size = {150,25};
     point maxPos;
     point minPos;
     int velocity;

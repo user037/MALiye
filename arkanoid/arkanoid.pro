@@ -40,6 +40,7 @@ HEADERS += \
         gwindow.h \
         mainwindow.h \
         platform.h \
+        player.h \
         tools.h
 
 FORMS += \

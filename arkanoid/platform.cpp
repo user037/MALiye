@@ -19,6 +19,11 @@ point platform::getPos()
     return this->pos;
 }
 
+point platform::getSize()
+{
+    return this->size;
+}
+
 int platform::getVelocity()
 {
     return this->velocity;

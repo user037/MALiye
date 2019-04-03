@@ -38,7 +38,11 @@ void gWindow::redrawBricks()
 
 void gWindow::redrawPlate()
 {
-
+    for(auto i : group_plate->childItems())
+    {
+        scene->removeItem(i);
+    }
+    group_plate->addToGroup(scene->addRect(this->platf->getPos().x, this->platf->getPos().y, this->platf->getSize().x, this->platf->getSize().y, brickPen));
 }
 
 void gWindow::totalRedraw()
