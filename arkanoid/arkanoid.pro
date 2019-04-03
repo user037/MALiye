@@ -31,7 +31,8 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     platform.cpp \
-    ball.cpp
+    ball.cpp \
+    player.cpp
 
 HEADERS += \
         brick.h \
@@ -40,7 +41,8 @@ HEADERS += \
         mainwindow.h \
         tools.h \
     platform.h \
-    ball.h
+    ball.h \
+    player.h
 
 FORMS += \
         mainwindow.ui

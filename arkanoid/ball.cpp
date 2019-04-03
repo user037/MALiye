@@ -1,5 +1,15 @@
 #include "ball.h"
 
+QRectF ball::boundingRect() const
+{
+
+}
+
+void ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+
+}
+
 point ball::getPos()
 {
     return this->pos;
@@ -22,12 +32,3 @@ void ball::changeDir(point newVelocity)
     this->velocity.y = newVelocity.y;
 }
 
-QRectF ball::boundingRect() const
-{
-
-}
-
-void ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-
-}
