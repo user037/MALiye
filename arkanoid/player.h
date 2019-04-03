@@ -11,7 +11,7 @@ public:
     int getHighScore();
     int getHp();
     int getLevel();
-    player(int curScore, int highScore, int hp, int level, QWidget *widget = nullptr);
+    player(int curScore, int highScore, int hp, int level, QGraphicsItem *parent = nullptr);
     void changeLevel(int newLevel);
     void death();
     void damage();
