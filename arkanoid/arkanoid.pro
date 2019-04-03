@@ -29,14 +29,18 @@ SOURCES += \
         gobject.cpp \
         gwindow.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    platform.cpp \
+    ball.cpp
 
 HEADERS += \
         brick.h \
         gobject.h \
         gwindow.h \
         mainwindow.h \
-        tools.h
+        tools.h \
+    platform.h \
+    ball.h
 
 FORMS += \
         mainwindow.ui
