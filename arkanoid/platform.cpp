@@ -1,11 +1,15 @@
 #include "platform.h"
-
 QRectF platform::boundingRect() const
 {
 
 }
 
 void platform::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+
+}
+
+platform::platform()
 {
 
 }

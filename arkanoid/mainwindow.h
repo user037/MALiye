@@ -5,6 +5,7 @@
 #include <cmath>
 #include <QObject>
 #include <QTimer>
+#include <platform.h>
 
 namespace Ui {
 class MainWindow;
@@ -18,6 +19,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     QTimer *tmr;
+    platform *platf;
 public slots:
     void theDamnLoop();
 signals:

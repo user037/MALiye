@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
             ui->graphicsView->addBrick({105*i,55*j},{100,50});
         }
     }
+    ui->graphicsView->addPlatform();
     ui->graphicsView->redrawBricks();
     tmr = new QTimer();
     connect(tmr, SIGNAL(timeout()), this, SLOT(theDamnLoop()));

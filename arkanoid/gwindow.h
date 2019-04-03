@@ -6,6 +6,7 @@
 #include <QGraphicsItem>
 #include <tools.h>
 #include <brick.h>
+#include <platform.h>
 #include <QDebug>
 
 class gWindow : public QGraphicsView
@@ -15,13 +16,20 @@ public:
     explicit gWindow(QWidget *parent = nullptr);
 
     void addBrick(point pos, point sz);
+    void addPlatform();
     void redrawBricks();
+    void redrawPlate(); //plate = platform
+    void totalRedraw();
     int bricksCount();
     brick* getBrick(int i);
 private:
     QGraphicsScene *scene;
+    QGraphicsItemGroup *group_blocks;
+    QGraphicsItemGroup *group_plate;
+    QGraphicsItemGroup *group_balls;
     QVector < brick* > bricks;
     QPen brickPen;
+    platform *platf;
 signals:
 
 public slots:

@@ -7,6 +7,7 @@
 class platform : public QGraphicsItem
 {
 public:
+    platform();
     point getPos();
     point getMaxPos();
     point getMinPos();
