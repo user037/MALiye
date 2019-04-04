@@ -86,8 +86,8 @@ void MainWindow::keyReleaseEvent(QKeyEvent *e)
 
 point intersecsion(point a, point b, point c, point d)
 {
-    int a1 = b.y - a.y, b1 = b.x - a.x, c1 = a.x * (a.y - b.y) + a.y * (a.x - b.x);
-    int a2 = d.y - c.y, b2 = d.x - c.x, c2 = c.x * (c.y - d.y) + c.y * (c.x - d.x);
+    double a1 = b.y - a.y, b1 = a.x - b.x, c1 = a.x * (a.y - b.y) + a.y * (b.x - a.x);
+    double a2 = d.y - c.y, b2 = c.x - d.x, c2 = c.x * (c.y - d.y) + c.y * (d.x - c.x);
     point p;
     p.x = (b1 * c2 - b2 * c1) / (a1 * b2 - a2 * b1);
     p.y = (a1 * c2 - a2 * c1) / (b1 * a2 - b2 * a1);
@@ -110,9 +110,9 @@ void MainWindow::theDamnLoop()
     for(int i = 0; i < ui->graphicsView->ballsCount(); i++)
     {
         int collided = 0; //0 - no collision, 1 - top/bottom, 2 - right/left
-        double delta = 0.001;
+        double delta = 1;
         ball *b = ui->graphicsView->getBall(i);
-        for(int j = 0; j < ui->graphicsView->bricksCount(); j++)
+        /*for(int j = 0; j < ui->graphicsView->bricksCount(); j++)
         {
             point p1 = ui->graphicsView->getBrick(j)->getPos();
             point p2 = {ui->graphicsView->getBrick(j)->getPos().x + 100, ui->graphicsView->getBrick(j)->getPos().y};
@@ -120,32 +120,60 @@ void MainWindow::theDamnLoop()
             point p4 = {ui->graphicsView->getBrick(j)->getPos().x + 100, ui->graphicsView->getBrick(j)->getPos().y + 50};
             point destination = {b->getPos().x + b->getVelocity().x, b->getPos().y + b->getVelocity().y};
             point check = {-1, -1};
-            if(fabs(intersecsion(b->getPos(), destination, p1, p2).x - check.x) < delta && fabs(intersecsion(b->getPos(), destination, p1, p2).y - check.y) < delta)
+            if(fabs(intersecsion(b->getPos(), destination, p1, p2).x - check.x) > delta && fabs(intersecsion(b->getPos(), destination, p1, p2).y - check.y) > delta)
             {
                 collided = 1;
-                qDebug() << "1";
+                qDebug() << intersecsion(b->getPos(), destination, p2, p4).x - b->getPos().x << intersecsion(b->getPos(), destination, p2, p4).y - b->getPos().y;
                 b->changeDir({intersecsion(b->getPos(), destination, p2, p4).x - b->getPos().x, intersecsion(b->getPos(), destination, p2, p4).y - b->getPos().y});
             }
-            else if(fabs(intersecsion(b->getPos(), destination, p3, p4).x - check.x) < delta && fabs(intersecsion(b->getPos(), destination, p3, p4).y - check.y) < delta)
+            else if(fabs(intersecsion(b->getPos(), destination, p3, p4).x - check.x) > delta && fabs(intersecsion(b->getPos(), destination, p3, p4).y - check.y) > delta)
             {
                 collided = 1;
                 qDebug() << "2";
                 b->changeDir({intersecsion(b->getPos(), destination, p2, p4).x - b->getPos().x, intersecsion(b->getPos(), destination, p2, p4).y - b->getPos().y});
             }
-            else if(fabs(intersecsion(b->getPos(), destination, p1, p3).x - check.x) < delta && fabs(intersecsion(b->getPos(), destination, p1, p3).y - check.y) < delta)
+            else if(fabs(intersecsion(b->getPos(), destination, p1, p3).x - check.x) > delta && fabs(intersecsion(b->getPos(), destination, p1, p3).y - check.y) > delta)
             {
                 collided = 2;
                 qDebug() << "3";
                 b->changeDir({intersecsion(b->getPos(), destination, p2, p4).x - b->getPos().x, intersecsion(b->getPos(), destination, p2, p4).y - b->getPos().y});
             }
-            else if(fabs(intersecsion(b->getPos(), destination, p2, p4).x - check.x) < delta && fabs(intersecsion(b->getPos(), destination, p2, p4).y - check.y) < delta)
+            else if(fabs(intersecsion(b->getPos(), destination, p2, p4).x - check.x) > delta && fabs(intersecsion(b->getPos(), destination, p2, p4).y - check.y) > delta)
             {
                 collided = 2;
                 qDebug() << "4";
                 b->changeDir({intersecsion(b->getPos(), destination, p2, p4).x - b->getPos().x, intersecsion(b->getPos(), destination, p2, p4).y - b->getPos().y});
             }
+        }*/
+        //b->move();
+        for(int j = 0; j < ui->graphicsView->bricksCount(); j++)
+        {
+            point p1 = ui->graphicsView->getBrick(j)->getPos();
+            point p2 = {ui->graphicsView->getBrick(j)->getPos().x + 100, ui->graphicsView->getBrick(j)->getPos().y};
+            point p3 = {ui->graphicsView->getBrick(j)->getPos().x, ui->graphicsView->getBrick(j)->getPos().y + 50};
+            point p4 = {ui->graphicsView->getBrick(j)->getPos().x + 100, ui->graphicsView->getBrick(j)->getPos().y + 50};
+            if(fabs(b->getPos().y - p1.y) < delta && b->getPos().x < p2.x && b->getPos().x + 50 > p1.x)
+            {
+                collided = 1;
+                break;
+            }
+            if(fabs(b->getPos().y - 50 - p3.y) < delta && b->getPos().x < p4.x && b->getPos().x + 50 > p3.x)
+            {
+                collided = 1;
+                break;
+            }
+            if(fabs(b->getPos().x + 50 - p1.x) < delta && b->getPos().y < p3.y && b->getPos().y + 50 > p1.y)
+            {
+                collided = 2;
+                break;
+            }
+            if(fabs(b->getPos().x - p2.x) < delta && b->getPos().y < p4.y && b->getPos().y + 50 > p2.y)
+            {
+                collided = 2;
+                break;
+            }
+
         }
-        b->move();
         if(collided == 1)
         {
             b->changeDir({b->getVelocity().x, -b->getVelocity().y});
