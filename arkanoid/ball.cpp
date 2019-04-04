@@ -12,6 +12,7 @@ void ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 ball::ball(point pos, point size, point init_vel)
 {
+    srand(time(nullptr));
     this->pos = pos;
     this->size = size;
     this->velocity = init_vel;
@@ -46,7 +47,7 @@ void ball::move()
 
 void ball::changeDir(point newVelocity)
 {
-    this->velocity.x = newVelocity.x;
-    this->velocity.y = newVelocity.y;
+    this->velocity.x = newVelocity.x + (0.01) * (rand() %10-5);
+    this->velocity.y = newVelocity.y + (0.01) * (rand() %10-5);
 }
 

@@ -3,6 +3,8 @@
 
 #include <QGraphicsItem>
 #include <tools.h>
+#include <random>
+#include <time.h>
 
 class ball : public QGraphicsItem
 {

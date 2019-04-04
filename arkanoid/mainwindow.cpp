@@ -1,6 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+bool isPositive(int i)
+{
+    if(i == std::abs(i))
+        return 1;
+    else
+        return 0;
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -17,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         keys.push_back(0);
     }
-    ui->graphicsView->addBall({400,400},{50,50},{-1,-2});
+    ui->graphicsView->addBall({400,400},{50,50},{-1,-3});
     for(int i = 1; i <= 6; i++)
     {
         for(int j = 1; j <= 5; j++)
@@ -160,7 +168,7 @@ void MainWindow::theDamnLoop()
             {
                 collided = 1;
                 ui->graphicsView->getBrick(j)->hit();
-                //break;
+                break;
             }
             if(fabs(b->getPos().y - p3.y) < delta && b->getPos().x < p4.x && b->getPos().x + b->getSize().x > p3.x)
             {
