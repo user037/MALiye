@@ -56,9 +56,6 @@ void MainWindow::theDamnLoop()
 {
     //for(int i = 0; i < ui->graphicsView->bricksCount(); i++)
     //ui->graphicsView->getBrick(i)->setPos({ui->graphicsView->getBrick(i)->getPos().x + 5,ui->graphicsView->getBrick(i)->getPos().y});
-    if(plate_dir == -1)
-        ui->graphicsView->platf->move(0);
-    if(plate_dir == 1)
-        ui->graphicsView->platf->move(1);
-    ui->graphicsView->totalRedraw();
+    ui->graphicsView->platf->move(plate_dir);
+    ui->graphicsView->redrawPlatform();
 }

@@ -32,13 +32,13 @@ int platform::getVelocity()
     return this->velocity;
 }
 
-void platform::move(bool dir)
+void platform::move(int dir)
 {
-    if(dir) //move to the right
+    if(dir == 1) //move to the right
     {
         this->pos.x += this->velocity;
     }
-    else //move to the left
+    else if(dir == -1) //move to the left
     {
         this->pos.x -= this->velocity;
     }

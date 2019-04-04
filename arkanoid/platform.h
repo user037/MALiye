@@ -14,7 +14,7 @@ public:
     point getMinPos();
     int getVelocity();
     platform(point pos, point maxPos, point minPos, int velocity, QGraphicsItem *parent = nullptr);
-    void move(bool dir);
+    void move(int dir);
 
 private:
     point pos;
