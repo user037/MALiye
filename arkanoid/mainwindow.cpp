@@ -104,7 +104,5 @@ void MainWindow::theDamnLoop()
         ui->graphicsView->isBallInBound(ui->graphicsView->getBall(i));
         ui->graphicsView->getBall(i)->move();
     }
-    ui->graphicsView->redrawPlatform();
-    ui->graphicsView->redrawBricks();
-    ui->graphicsView->redrawBalls();
+    ui->graphicsView->totalRedraw();
 }

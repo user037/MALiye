@@ -27,17 +27,19 @@ public:
     int ballsCount();
     int isBallInBound(ball *item);
     bool hasInBricks(QGraphicsItem &it);
-    brick* getBrick(int i);
-    ball* getBall(int i);
-    platform *platf;
+    QGraphicsScene *scene;
     QGraphicsItemGroup *group_blocks;
     QGraphicsItemGroup *group_plate;
     QGraphicsItemGroup *group_balls;
-    QGraphicsScene *scene;
+    brick* getBrick(int i);
+    ball* getBall(int i);
+    platform *platf;
 private:
     QVector < brick* > bricks;
     QVector < ball* > balls;
     QPen brickPen;
+    QPen platePen;
+    QBrush plateBrush;
 signals:
 
 public slots:
