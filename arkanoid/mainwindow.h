@@ -8,6 +8,8 @@
 #include <QKeyEvent>
 #include <QEvent>
 #include <platform.h>
+#include <bits/stdc++.h>
+#include <QDebug>
 
 namespace Ui {
 class MainWindow;
