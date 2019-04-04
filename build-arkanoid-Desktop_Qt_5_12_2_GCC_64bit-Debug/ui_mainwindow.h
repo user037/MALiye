@@ -11,9 +11,9 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QWidget>
+#include "gwindow.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -21,7 +21,7 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QGraphicsView *graphicsView;
+    gWindow *graphicsView;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -30,7 +30,7 @@ public:
         MainWindow->resize(800, 600);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        graphicsView = new QGraphicsView(centralWidget);
+        graphicsView = new gWindow(centralWidget);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
         graphicsView->setGeometry(QRect(0, 0, 800, 600));
         MainWindow->setCentralWidget(centralWidget);

@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QKeyEvent>
+#include <QEvent>
 #include <platform.h>
 
 namespace Ui {
@@ -18,7 +19,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
     QTimer *tmr;
     platform *platf;
     void keyPressEvent(QKeyEvent *e) override;
@@ -28,6 +29,7 @@ public slots:
 signals:
 private:
     int plate_dir = 0;
+    QVector  <bool> keys;
     Ui::MainWindow *ui;
 };
 

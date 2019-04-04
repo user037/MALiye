@@ -5,6 +5,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    qApp->setKeyboardInputInterval(10);
     ui->setupUi(this);
     this->setWindowTitle("Arkanoid-3000.");
 
@@ -12,6 +13,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setSceneRect(0, 0, 795, 595);
     ui->graphicsView->setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
     ui->graphicsView->setVerticalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
+
+    for(int i  = 0; i < 256; i++)//init keys
+    {
+        keys.push_back(0);
+    }
 
     for(int i = 1; i <= 6; i++)
     {
@@ -38,18 +44,36 @@ MainWindow::~MainWindow()
 
 void MainWindow::keyPressEvent(QKeyEvent *e)
 {
-    qDebug() << e;
-    if(e->key() == Qt::Key_A)
-        plate_dir = -1;
-    if(e->key() == Qt::Key_D)
-        plate_dir = 1;
+    if(e->isAutoRepeat() == 0)
+    {
+        keys[e->nativeScanCode()] = 1;
+
+        //press
+        if(keys[38]) // Left
+        {
+            plate_dir = -1;
+        }
+        if(keys[40])// Right
+        {
+            plate_dir = 1;
+        }
+    }
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *e)
 {
-    if(e->key() == Qt::Key_A || e->key() == Qt::Key_D)
-        plate_dir = 0;
-    qDebug() << e;
+    if(e->isAutoRepeat() == 0)
+    {
+        keys[e->nativeScanCode()] = 0;
+    }
+
+
+    //release
+    if(e->isAutoRepeat() == 0)
+    {
+        if(!keys[38] && !keys[40])
+            plate_dir = 0;
+    }
 }
 
 void MainWindow::theDamnLoop()
