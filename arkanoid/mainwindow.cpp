@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         keys.push_back(0);
     }
-    ui->graphicsView->addBall({500,500},{50,50},{-5,-10});
+    ui->graphicsView->addBall({500,500},{50,50},{-2,-2});
     for(int i = 1; i <= 6; i++)
     {
         for(int j = 1; j <= 5; j++)
@@ -93,18 +93,35 @@ void MainWindow::theDamnLoop()
     ui->graphicsView->platf->move(plate_dir);
     for(int i = 0; i < ui->graphicsView->ballsCount(); i++)
     {
-        bool collided;
-        for(auto j: ui->graphicsView->group_balls->collidingItems())
+        int collided = 0; //0 - no collision, 1 - top/bottom, 2 - right/left
+        ball *b = ui->graphicsView->getBall(i);
+        const float delta = 0.01;
+        for(int j; j < ui->graphicsView->bricksCount(); j++)
         {
-            if(ui->graphicsView->hasInBricks(*j))
+            if(fabs(b->getPos().y - (ui->graphicsView->getBrick(j)->getPos().y + 50)) < delta)
             {
                 collided = 1;
             }
+            if(fabs((b->getPos().y + 50) - ui->graphicsView->getBrick(j)->getPos().x) < delta)
+            {
+                collided = 1;
+            }
+            if(fabs(b->getPos().x - (ui->graphicsView->getBrick(j)->getPos().x + 100)) < delta)
+            {
+                collided = 2;
+            }
+            if(fabs((b->getPos().x + 50) - ui->graphicsView->getBrick(j)->getPos().x) < delta)
+            {
+                collided = 2;
+            }
         }
-        ball *b = ui->graphicsView->getBall(i);
-        if(collided)
+        if(collided == 1)
         {
-
+            b->changeDir({b->getVelocity().x, -b->getVelocity().y});
+        }
+        else if(collided == 2)
+        {
+            b->changeDir({-b->getVelocity().x, b->getVelocity().y});
         }
         int isInBound = ui->graphicsView->isBallInBound(b);
         if(isInBound == 1)
