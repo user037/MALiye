@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         keys.push_back(0);
     }
-    ui->graphicsView->addBall({500,500},{50,50},{-1,-2});
+    ui->graphicsView->addBall({400,400},{50,50},{-1,-2});
     for(int i = 1; i <= 6; i++)
     {
         for(int j = 1; j <= 5; j++)
@@ -84,7 +84,7 @@ void MainWindow::keyReleaseEvent(QKeyEvent *e)
     }
 }
 
-point intersecsion(point a, point b, point c, point d)
+/*point intersecsion(point a, point b, point c, point d)
 {
     double a1 = b.y - a.y, b1 = a.x - b.x, c1 = a.x * (a.y - b.y) + a.y * (b.x - a.x);
     double a2 = d.y - c.y, b2 = c.x - d.x, c2 = c.x * (c.y - d.y) + c.y * (d.x - c.x);
@@ -100,7 +100,7 @@ point intersecsion(point a, point b, point c, point d)
     }
     return {-1, -1};
 
-}
+}*/
 
 void MainWindow::theDamnLoop()
 {
@@ -196,6 +196,10 @@ void MainWindow::theDamnLoop()
             b->changeDir({-b->getVelocity().x, b->getVelocity().y});
         }
         if(isInBound == 4)
+        {
+            b->changeDir({b->getVelocity().x, -b->getVelocity().y});
+        }
+        if(fabs(b->getPos().y + 50 - ui->graphicsView->platf->getPos().y) < delta && b->getPos().x < ui->graphicsView->platf->getPos().x + 150 && b->getPos().x + 50 > ui->graphicsView->platf->getPos().x)
         {
             b->changeDir({b->getVelocity().x, -b->getVelocity().y});
         }
