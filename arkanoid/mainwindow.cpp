@@ -110,6 +110,7 @@ void MainWindow::theDamnLoop()
     for(int i = 0; i < ui->graphicsView->ballsCount(); i++)
     {
         int collided = 0; //0 - no collision, 1 - top/bottom, 2 - right/left
+        double delta = 0.001;
         ball *b = ui->graphicsView->getBall(i);
         for(int j = 0; j < ui->graphicsView->bricksCount(); j++)
         {
@@ -119,25 +120,25 @@ void MainWindow::theDamnLoop()
             point p4 = {ui->graphicsView->getBrick(j)->getPos().x + 100, ui->graphicsView->getBrick(j)->getPos().y + 50};
             point destination = {b->getPos().x + b->getVelocity().x, b->getPos().y + b->getVelocity().y};
             point check = {-1, -1};
-            if(intersecsion(b->getPos(), destination, p1, p2).x != check.x && intersecsion(b->getPos(), destination, p1, p2).y != check.y)
+            if(fabs(intersecsion(b->getPos(), destination, p1, p2).x - check.x) < delta && fabs(intersecsion(b->getPos(), destination, p1, p2).y - check.y) < delta)
             {
                 collided = 1;
                 qDebug() << "1";
                 b->changeDir({intersecsion(b->getPos(), destination, p2, p4).x - b->getPos().x, intersecsion(b->getPos(), destination, p2, p4).y - b->getPos().y});
             }
-            else if(intersecsion(b->getPos(), destination, p3, p4).x != check.x && intersecsion(b->getPos(), destination, p3, p4).y != check.y)
+            else if(fabs(intersecsion(b->getPos(), destination, p3, p4).x - check.x) < delta && fabs(intersecsion(b->getPos(), destination, p3, p4).y - check.y) < delta)
             {
                 collided = 1;
                 qDebug() << "2";
                 b->changeDir({intersecsion(b->getPos(), destination, p2, p4).x - b->getPos().x, intersecsion(b->getPos(), destination, p2, p4).y - b->getPos().y});
             }
-            else if(intersecsion(b->getPos(), destination, p1, p3).x != check.x && intersecsion(b->getPos(), destination, p1, p3).y != check.y)
+            else if(fabs(intersecsion(b->getPos(), destination, p1, p3).x - check.x) < delta && fabs(intersecsion(b->getPos(), destination, p1, p3).y - check.y) < delta)
             {
                 collided = 2;
                 qDebug() << "3";
                 b->changeDir({intersecsion(b->getPos(), destination, p2, p4).x - b->getPos().x, intersecsion(b->getPos(), destination, p2, p4).y - b->getPos().y});
             }
-            else if(intersecsion(b->getPos(), destination, p2, p4).x != check.x && intersecsion(b->getPos(), destination, p2, p4).y != check.y)
+            else if(fabs(intersecsion(b->getPos(), destination, p2, p4).x - check.x) < delta && fabs(intersecsion(b->getPos(), destination, p2, p4).y - check.y) < delta)
             {
                 collided = 2;
                 qDebug() << "4";
