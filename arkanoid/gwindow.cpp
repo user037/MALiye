@@ -35,6 +35,11 @@ void gWindow::addBrick(point pos, point sz, int id)
     bricks.push_back(new brick(pos, sz, id));
 }
 
+void gWindow::addPlayer()
+{
+    pl = new player(0, 0, 2, 2, 0);
+}
+
 void gWindow::addPlatform()
 {
     platf = new platform({325,500},{800-160,600-25},{0,0}, 15);

@@ -7,6 +7,7 @@
 #include <tools.h>
 #include <brick.h>
 #include <ball.h>
+#include <player.h>
 #include <platform.h>
 #include <QDebug>
 #include <QDir>
@@ -18,6 +19,7 @@ public:
     explicit gWindow(QWidget *parent = nullptr);
 
     void addBrick(point pos, point sz, int id);
+    void addPlayer();
     void addPlatform();
     void addBall(point pos, point size, point init_vel);
     void redrawBricks();
@@ -35,6 +37,7 @@ public:
     QGraphicsItemGroup *group_bg;
     brick* getBrick(int i);
     ball* getBall(int i);
+    player *pl;
     platform *platf;
 private:
     QVector < brick* > bricks;

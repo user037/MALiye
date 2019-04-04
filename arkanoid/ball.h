@@ -16,6 +16,7 @@ public:
     point getVelocity();
     ball(point pos, point velocity, QGraphicsItem *parent = nullptr);
     void move();
+    void teleport(point newPos);
     void changeDir(point newVelocity);
 private:
     point pos;

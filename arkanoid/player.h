@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <QGraphicsItem>
+#include <QDebug>
 #include <tools.h>
 
 class player : QGraphicsItem
