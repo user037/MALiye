@@ -4,25 +4,26 @@ gridlenght = 25
 
 
 def draw(n, m):
-    root.geometry(str(gridlenght * n + 200) + 'x' + str(gridlenght * m + 100))  # window geometry
+    root.geometry(str(gridlenght * m + 100) + 'x' + str(gridlenght * n + 200))  # window geometry
     root.resizable(0, 0)
 
-    global w
-    w = Canvas(root, width=gridlenght * n, height=gridlenght * m)  # canvas for drawing and binds for mouse events
+    global w, grid
+    w = Canvas(root, height=gridlenght * n, width=gridlenght * m)  # canvas for drawing and binds for mouse events
     w.bind("<Button-1>", callbackl)
     w.bind('<Button-3>', callbackr)
     w.place(x=0, y=0)
 
     for i in range(n):
         for j in range(m):
+            print(grid[i][j], end=' ')
             if grid[i][j] == 1:
                 color = 'blue'
             else:
                 color = 'white'
 
-            w.create_rectangle(i * gridlenght, j * gridlenght, i * gridlenght + gridlenght, j * gridlenght + gridlenght,
+            w.create_rectangle(j * gridlenght, i * gridlenght, j * gridlenght + gridlenght, i * gridlenght + gridlenght,
                                fill=color)  # grid
-
+        print()
 
 def callbackl(event):
     global grid
@@ -88,8 +89,38 @@ def window():
 
 
 def fileopen():
+    new.destroy()
+    file.destroy()
+
     filedialopen()
     window()
+
+
+def receive():
+    global n, m, grid
+    send.destroy()
+    label.destroy()
+    n, m = map(int, entry.get().split())
+    entry.destroy()
+    grid = [[0 for i in range(m)] for j in range(n)]
+    window()
+
+
+def newopen():
+    new.destroy()
+    file.destroy()
+
+    global entry
+    entry = Entry()
+    entry.pack(pady=10)
+
+    global label
+    label = Label(text='n, m через пробел', height=3)
+    label.pack()
+
+    global send
+    send = Button(text='Send', command=receive)
+    send.pack()
 
 
 if __name__ == '__main__':
@@ -98,7 +129,7 @@ if __name__ == '__main__':
     grid = [[0 for i in range(10)] for j in range(10)]  # grid of blocks
     root = Tk()
 
-    new = Button(text='New', command=window)
+    new = Button(text='New', command=newopen)
     new.pack()
 
     file = Button(text='Open', command=fileopen)
