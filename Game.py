@@ -20,7 +20,7 @@ def main():
 
     ccolor = (0, 128, 255)
 
-    ball = pygame.Rect(200, y1 - 120, 30, 30)
+    ball = pygame.Rect(200, y1 - 120, 20, 20)
     ballvelx = -3
     ballvely = -3
     ballcolor = (255, 100, 0)
@@ -103,7 +103,7 @@ def main():
         if ball.y < 0:
             ball.y = 0
             ballvely = -ballvely
-        elif ball.y > y1 - ball.width:
+        if ball.y > y1 - ball.width - 5:
             quit()
 
         pygame.draw.rect(screen, ballcolor, ball)
