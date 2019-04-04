@@ -4,10 +4,12 @@ gridlenght = 25
 
 
 def draw(n, m):
+    global w, grid
+    w.destroy()
+    root.configure(bg='white')
     root.geometry(str(gridlenght * m + 100) + 'x' + str(gridlenght * n + 200))  # window geometry
     root.resizable(0, 0)
 
-    global w, grid
     w = Canvas(root, height=gridlenght * n, width=gridlenght * m)  # canvas for drawing and binds for mouse events
     w.bind("<Button-1>", callbackl)
     w.bind('<Button-3>', callbackr)
@@ -25,23 +27,28 @@ def draw(n, m):
                                fill=color)  # grid
         print()
 
+
 def callbackl(event):
     global grid
-    w.create_rectangle((event.x // gridlenght) * gridlenght, (event.y // gridlenght) * gridlenght,
-                       (event.x // gridlenght) * gridlenght + gridlenght,
-                       (event.y // gridlenght) * gridlenght + gridlenght, fill='blue')
-    grid[(event.y // gridlenght)][(event.x // gridlenght)] = 1
-    print('\n'.join(map(str, grid)))
-    print("clicked at", event.x, event.y)
+    if event.x // gridlenght < m and event.y // gridlenght < n:
+        w.create_rectangle((event.x // gridlenght) * gridlenght, (event.y // gridlenght) * gridlenght,
+                           (event.x // gridlenght) * gridlenght + gridlenght,
+                           (event.y // gridlenght) * gridlenght + gridlenght, fill='blue')
+        grid[(event.y // gridlenght)][(event.x // gridlenght)] = 1
+
+        print('\n'.join(map(str, grid)))
+        print("clicked at", event.x, event.y)
 
 
 def callbackr(event):
-    w.create_rectangle((event.x // gridlenght) * gridlenght, (event.y // gridlenght) * gridlenght,
-                       (event.x // gridlenght) * gridlenght + gridlenght,
-                       (event.y // gridlenght) * gridlenght + gridlenght, fill='white')
-    grid[(event.y // gridlenght)][(event.x // gridlenght)] = 0
-    print('\n'.join(map(str, grid)))
-    print("clicked at", event.x, event.y)
+    if event.x // gridlenght < m and event.y // gridlenght < n:
+        w.create_rectangle((event.x // gridlenght) * gridlenght, (event.y // gridlenght) * gridlenght,
+                           (event.x // gridlenght) * gridlenght + gridlenght,
+                           (event.y // gridlenght) * gridlenght + gridlenght, fill='white')
+        grid[(event.y // gridlenght)][(event.x // gridlenght)] = 0
+
+        print('\n'.join(map(str, grid)))
+        print("clicked at", event.x, event.y)
 
 
 def filedialopen():
@@ -135,4 +142,5 @@ if __name__ == '__main__':
     file = Button(text='Open', command=fileopen)
     file.pack()
 
+    w = Canvas()
     mainloop()
