@@ -44,6 +44,11 @@ void ball::move()
     this->pos.y += this->velocity.y;
 }
 
+void ball::teleport(point newPos)
+{
+    this->pos = newPos;
+}
+
 void ball::changeDir(point newVelocity)
 {
     this->velocity.x = newVelocity.x;

@@ -51,6 +51,7 @@ void player::changeLevel(int newLevel)
 
 void player::death()
 {
+    qDebug() << "ded :(" << 1 / 0;
     this->hp = this->startHp;
 }
 

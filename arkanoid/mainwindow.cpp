@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
             ui->graphicsView->addBrick({105.0*i-25,55.0*j},{100,50},1);
         }
     }
+    ui->graphicsView->addPlayer();
     ui->graphicsView->addPlatform();
     ui->graphicsView->redrawBricks();
     ui->graphicsView->redrawPlatform();
@@ -212,6 +213,11 @@ void MainWindow::theDamnLoop()
             b->changeDir({b->getVelocity().x, -b->getVelocity().y});
         }
         b->move();
+        if(b->getPos().y > ui->graphicsView->platf->getPos().y)
+        {
+            ui->graphicsView->pl->damage();
+            b->teleport({400, 400});
+        }
     }
     ui->graphicsView->totalRedraw();
 }
