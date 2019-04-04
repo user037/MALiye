@@ -31,15 +31,17 @@ public:
     QGraphicsItemGroup *group_blocks;
     QGraphicsItemGroup *group_plate;
     QGraphicsItemGroup *group_balls;
+    QGraphicsItemGroup *group_bg;
     brick* getBrick(int i);
     ball* getBall(int i);
     platform *platf;
 private:
     QVector < brick* > bricks;
     QVector < ball* > balls;
-    QPen brickPen;
-    QPen platePen;
-    QBrush plateBrush;
+    QPen nonePen;
+    QBrush *plateBrush;
+    QBrush *ballBrush;
+    QBrush *brickBrush;
 signals:
 
 public slots:

@@ -3,17 +3,28 @@
 gWindow::gWindow(QWidget *parent) : QGraphicsView(parent)
 {
     scene = new QGraphicsScene();
+    group_bg = new QGraphicsItemGroup();
     group_blocks = new QGraphicsItemGroup();
     group_plate = new QGraphicsItemGroup();
     group_balls = new QGraphicsItemGroup();
     scene->addItem(group_blocks);
     scene->addItem(group_plate);
     scene->addItem(group_balls);
+    scene->addItem(group_bg);
+    group_bg->setZValue(-10);
+    QBrush blackBrush(Qt::black);
+    QPen blackPen(Qt::black);
+    group_bg->addToGroup(scene->addRect(0,0,1000,1000,blackPen,blackBrush));
+    group_balls->setZValue(10);
     this->setScene(scene);
-    QPixmap plateTexture("C:/MALiye/arkanoid/img/panel.bmp");
-    plateBrush.setTexture(plateTexture);
-    brickPen.setColor(Qt::red);
-    platePen.setWidth(1);
+    QImage plateTexture("/home/user/git/maliye/arkanoid/img/panel.bmp");
+    QImage ballTexture("/home/user/git/maliye/arkanoid/img/ball.bmp");
+    QImage brickTexture("/home/user/git/maliye/arkanoid/img/brick-base.bmp");
+    plateBrush = new QBrush(plateTexture);
+    ballBrush = new QBrush(ballTexture);
+    brickBrush = new QBrush(brickTexture);
+    nonePen.setColor(Qt::black);
+    nonePen.setWidth(-1);
 }
 
 void gWindow::addBrick(point pos, point sz, int id)
@@ -40,8 +51,12 @@ void gWindow::redrawBricks()
 
     for(auto i : bricks)
     {
-        group_blocks->addToGroup(scene->addRect(i->getPos().x, i->getPos().y, i->getSize().x, i->getSize().y, brickPen));
-
+        if(i->getId() != 0)
+        {
+            QTransform btransf = i->transform();
+            brickBrush->setTransform(btransf);
+            group_blocks->addToGroup(scene->addRect(i->getPos().x, i->getPos().y, i->getSize().x, i->getSize().y, nonePen,*brickBrush));
+        }
     }
 }
 
@@ -54,8 +69,10 @@ void gWindow::redrawBalls()
 
     for(auto i : balls)
     {
-        group_blocks->addToGroup(scene->addRect(i->getPos().x, i->getPos().y, i->getSize().x, i->getSize().y, brickPen));
+        group_blocks->addToGroup(scene->addRect(i->getPos().x, i->getPos().y, i->getSize().x, i->getSize().y, nonePen, *ballBrush));
+        group_blocks->childItems()[group_blocks->childItems().size()-1]->setZValue(10);
     }
+    group_balls->setZValue(10);
 }
 
 void gWindow::redrawPlatform()
@@ -64,11 +81,13 @@ void gWindow::redrawPlatform()
     {
         scene->removeItem(i);
     }
-    group_plate->addToGroup(scene->addRect(0, 0, this->platf->getSize().x, this->platf->getSize().y, brickPen));
-    group_plate->addToGroup(scene->addRect(0, 0, this->platf->getSize().x + 40, this->platf->getSize().y + 40, platePen,plateBrush));
-        plateBrush.setTransform(group_plate->childItems()[0]->transform());
+    group_plate->addToGroup(scene->addRect(0, 0, this->platf->getSize().x, this->platf->getSize().y, nonePen));
+    group_plate->addToGroup(scene->addRect(0, 0, this->platf->getSize().x + 40, this->platf->getSize().y + 40, nonePen,*plateBrush));
+        this->plateBrush->setTransform(group_plate->childItems()[0]->transform());
     group_plate->childItems()[0]->setPos(this->platf->getPos().x, this->platf->getPos().y);
     group_plate->childItems()[1]->setPos(this->platf->getPos().x - 20, this->platf->getPos().y - 20);
+    group_blocks->childItems()[0]->setZValue(0);
+    group_blocks->childItems()[1]->setZValue(5);
 }
 
 void gWindow::totalRedraw()
