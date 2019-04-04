@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     ui->graphicsView->addPlatform();
     ui->graphicsView->redrawBricks();
-    ui->graphicsView->redrawPlate();
+    ui->graphicsView->redrawPlatform();
     tmr = new QTimer();
     connect(tmr, SIGNAL(timeout()), this, SLOT(theDamnLoop()));
     qDebug() << "Sent Signal!";

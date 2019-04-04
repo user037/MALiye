@@ -36,7 +36,7 @@ void gWindow::redrawBricks()
     }
 }
 
-void gWindow::redrawPlate()
+void gWindow::redrawPlatform()
 {
     for(auto i : group_plate->childItems())
     {
@@ -47,7 +47,7 @@ void gWindow::redrawPlate()
 
 void gWindow::totalRedraw()
 {
-    redrawPlate();
+    redrawPlatform();
     redrawBricks();
 }
 

@@ -1,0 +1,10 @@
+debug/ball.o
+debug/brick.o
+debug/gobject.o
+debug/gwindow.o
+debug/main.o
+debug/mainwindow.o
+debug/platform.o
+debug/player.o
+debug/moc_gwindow.o
+debug/moc_mainwindow.o

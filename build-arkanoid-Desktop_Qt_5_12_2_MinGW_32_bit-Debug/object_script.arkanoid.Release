@@ -1,0 +1,10 @@
+release/ball.o
+release/brick.o
+release/gobject.o
+release/gwindow.o
+release/main.o
+release/mainwindow.o
+release/platform.o
+release/player.o
+release/moc_gwindow.o
+release/moc_mainwindow.o

@@ -18,7 +18,7 @@ public:
     void addBrick(point pos, point sz, int id);
     void addPlatform();
     void redrawBricks();
-    void redrawPlate(); //plate = platform
+    void redrawPlatform(); //plate = platform
     void totalRedraw();
     int bricksCount();
     brick* getBrick(int i);
