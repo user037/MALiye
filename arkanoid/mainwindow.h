@@ -10,6 +10,7 @@
 #include <platform.h>
 #include <bits/stdc++.h>
 #include <QDebug>
+#include <QDir>
 
 namespace Ui {
 class MainWindow;

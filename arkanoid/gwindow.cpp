@@ -17,19 +17,11 @@ gWindow::gWindow(QWidget *parent) : QGraphicsView(parent)
     group_bg->addToGroup(scene->addRect(0,0,1000,1000,blackPen,blackBrush));
     group_balls->setZValue(10);
     this->setScene(scene);
-#if (defined (_WIN32) || defined (_WIN64))
-    QImage plateTexture("/home/user/git/maliye/arkanoid/img/panel.bmp");
-    QImage ballTexture("/home/user/git/maliye/arkanoid/img/ball.bmp");
-    QImage brickTexture("/home/user/git/maliye/arkanoid/img/brick-base.bmp");
-    qDebug() << "WIN OS!!! (IS BAD)";
-#endif
 
-#if (defined (LINUX) || defined (__linux__))
-    QImage plateTexture("/home/user/git/maliye/arkanoid/img/panel.bmp");
-    QImage ballTexture("/home/user/git/maliye/arkanoid/img/ball.bmp");
-    QImage brickTexture("/home/user/git/maliye/arkanoid/img/brick-base.bmp");
-    qDebug() << "LINUX OS!!! (IS GOOD)";
-#endif
+    QImage plateTexture(QDir::currentPath() + "/../arkanoid/img/panel.bmp");
+    QImage ballTexture(QDir::currentPath() + "/../arkanoid/img/ball.bmp");
+    QImage brickTexture(QDir::currentPath() + "/../arkanoid/img/brick-base.bmp");
+    qDebug() << QDir::currentPath();
 
     plateBrush = new QBrush(plateTexture);
     ballBrush = new QBrush(ballTexture);
@@ -64,7 +56,8 @@ void gWindow::redrawBricks()
     {
         if(i->getId() != 0)
         {
-            QTransform btransf = i->transform();
+            QTransform btransf;
+            btransf.translate(i->getPos().x, i->getPos().y);
             brickBrush->setTransform(btransf);
             group_blocks->addToGroup(scene->addRect(i->getPos().x, i->getPos().y, i->getSize().x, i->getSize().y, nonePen,*brickBrush));
         }
@@ -94,7 +87,7 @@ void gWindow::redrawPlatform()
     }
     group_plate->addToGroup(scene->addRect(0, 0, this->platf->getSize().x, this->platf->getSize().y, nonePen));
     group_plate->addToGroup(scene->addRect(0, 0, this->platf->getSize().x + 40, this->platf->getSize().y + 40, nonePen,*plateBrush));
-        this->plateBrush->setTransform(group_plate->childItems()[0]->transform());
+    this->plateBrush->setTransform(group_plate->childItems()[0]->transform());
     group_plate->childItems()[0]->setPos(this->platf->getPos().x, this->platf->getPos().y);
     group_plate->childItems()[1]->setPos(this->platf->getPos().x - 20, this->platf->getPos().y - 20);
     group_blocks->childItems()[0]->setZValue(0);

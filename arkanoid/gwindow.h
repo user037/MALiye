@@ -9,6 +9,7 @@
 #include <ball.h>
 #include <platform.h>
 #include <QDebug>
+#include <QDir>
 
 class gWindow : public QGraphicsView
 {

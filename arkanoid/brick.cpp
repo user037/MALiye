@@ -29,6 +29,7 @@ brick::brick(point pos, point sz, int id, QGraphicsItem *parent) : QGraphicsItem
 {
     this->pos = pos;
     this->size = sz;
+    this->id = id;
 }
 
 void brick::setPos(point newPos)
@@ -40,6 +41,6 @@ void brick::hit()
 {
     if(this->id > 0)
     {
-        --this->id;
+        this->id = this->id - 1;
     }
 }
