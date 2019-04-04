@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import filedialog as fd
 gridlenght = 25
+types = [[1, 'blue'], [2, 'red']]
+curtype = 0
 
 
 def draw(n, m):
@@ -16,14 +18,16 @@ def draw(n, m):
     w.bind('<Button-3>', callbackr)
     w.bind("<Button3-Motion>", callbackr)
     w.bind('<Button-2>', clear)
+    root.bind("<Key-Right>", keycheckr)
+    root.bind('<Key-Left>', keycheckl)
 
     w.place(x=0, y=0)
 
     for i in range(n):
         for j in range(m):
             print(grid[i][j], end=' ')
-            if grid[i][j] == 1:
-                color = 'blue'
+            if grid[i][j] != 0:
+                color = types[curtype][1]
             else:
                 color = 'white'
 
@@ -37,8 +41,8 @@ def callbackl(event):
     if event.x // (2 * gridlenght) < m * 2 and event.y // gridlenght < n:
         w.create_rectangle((event.x // (gridlenght * 2)) * 2 * gridlenght, (event.y // gridlenght) * gridlenght,
                            (event.x // (gridlenght * 2)) * 2 * gridlenght + 2 * gridlenght,
-                           (event.y // gridlenght) * gridlenght + gridlenght, fill='blue')
-        grid[(event.y // gridlenght)][(event.x // (2 * gridlenght))] = 1
+                           (event.y // gridlenght) * gridlenght + gridlenght, fill=types[curtype][1])
+        grid[(event.y // gridlenght)][(event.x // (2 * gridlenght))] = types[curtype][0]
 
         print('\n'.join(map(str, grid)))
         print("clicked at", event.x, event.y)
@@ -94,6 +98,7 @@ def window():
     file.destroy()
 
     draw(n, m)
+    drawcur()
 
     menubar = Menu(root)  # menu for handling of files
     filemenu = Menu(menubar, tearoff=0)
@@ -179,6 +184,28 @@ def clear(event):
     draw(n, m)
 
 
+def keycheckr(event):
+    global curtype
+    if curtype < len(types) - 1:
+        curtype += 1
+        drawcur()
+
+
+def keycheckl(event):
+    global curtype
+    if curtype > 0:
+        curtype -= 1
+        drawcur()
+
+
+def drawcur():
+    global c
+    c.destroy()
+    c = Canvas(root, height=50, width=50)
+    c.pack(side='right')
+    c.create_rectangle(0, 0, 50, 50, fill=types[curtype][1])
+
+
 if __name__ == '__main__':
     n = 10
     m = 10
@@ -196,4 +223,6 @@ if __name__ == '__main__':
     quitbutton.pack()
 
     w = Canvas()
+    c = Canvas()
+
     root.mainloop()
