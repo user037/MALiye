@@ -17,9 +17,20 @@ gWindow::gWindow(QWidget *parent) : QGraphicsView(parent)
     group_bg->addToGroup(scene->addRect(0,0,1000,1000,blackPen,blackBrush));
     group_balls->setZValue(10);
     this->setScene(scene);
+#if (defined (_WIN32) || defined (_WIN64))
     QImage plateTexture("/home/user/git/maliye/arkanoid/img/panel.bmp");
     QImage ballTexture("/home/user/git/maliye/arkanoid/img/ball.bmp");
     QImage brickTexture("/home/user/git/maliye/arkanoid/img/brick-base.bmp");
+    qDebug() << "WIN OS!!! (IS BAD)";
+#endif
+
+#if (defined (LINUX) || defined (__linux__))
+    QImage plateTexture("/home/user/git/maliye/arkanoid/img/panel.bmp");
+    QImage ballTexture("/home/user/git/maliye/arkanoid/img/ball.bmp");
+    QImage brickTexture("/home/user/git/maliye/arkanoid/img/brick-base.bmp");
+    qDebug() << "LINUX OS!!! (IS GOOD)";
+#endif
+
     plateBrush = new QBrush(plateTexture);
     ballBrush = new QBrush(ballTexture);
     brickBrush = new QBrush(brickTexture);
