@@ -37,7 +37,7 @@ def draw(n, m):
 
 def callbackl(event):
     global grid
-    if event.x // (2 * gridlenght) < m * 2 and event.y // gridlenght < n:
+    if event.x // (2 * gridlenght) < m and event.y // gridlenght < n:
         w.create_rectangle((event.x // (gridlenght * 2)) * 2 * gridlenght, (event.y // gridlenght) * gridlenght,
                            (event.x // (gridlenght * 2)) * 2 * gridlenght + 2 * gridlenght,
                            (event.y // gridlenght) * gridlenght + gridlenght, fill=types[curtype][1])
@@ -48,7 +48,7 @@ def callbackl(event):
 
 
 def callbackr(event):
-    if event.x // (2 * gridlenght) < m * 2 and event.y // gridlenght < n:
+    if event.x // (2 * gridlenght) < m and event.y // gridlenght < n:
         w.create_rectangle((event.x // (gridlenght * 2)) * 2 * gridlenght, (event.y // gridlenght) * gridlenght,
                            (event.x // (gridlenght * 2)) * 2 * gridlenght + 2 * gridlenght,
                            (event.y // gridlenght) * gridlenght + gridlenght, fill='white')
@@ -62,6 +62,8 @@ def filedialopen():
     global grid, n, m
     file_name = fd.askopenfilename(filetypes=(("Level files", "*.lvl"), ("All files", "*.*")))
     inp = open(file_name)
+    root.title(string=std + ' - ' + file_name)
+
     n, m = map(int, inp.readline().rstrip().split())
 
     s = inp.readline().rstrip()
@@ -209,11 +211,12 @@ def drawcur():
 
 
 if __name__ == '__main__':
+    std = 'Arkanoid 3000 editor'
     n = 10
     m = 10
     grid = [[0 for i in range(10)] for j in range(10)]  # grid of blocks
     root = Tk()
-    root.title(string='Arkanoid 3000 editor')
+    root.title(string=std)
     root.resizable(0, 0)
 
     new = Button(text='New', command=newopen)
