@@ -10,9 +10,21 @@ void ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 }
 
+ball::ball(point pos, point size, point init_vel)
+{
+    this->pos = pos;
+    this->size = size;
+    this->velocity = init_vel;
+}
+
 point ball::getPos()
 {
     return this->pos;
+}
+
+point ball::getSize()
+{
+    return this->size;
 }
 
 point ball::getVelocity()

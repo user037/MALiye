@@ -7,6 +7,7 @@
 class platform : public QGraphicsItem
 {
 public:
+    QString getClass() {return "platform";}
     platform();
     point getPos();
     point getSize();
