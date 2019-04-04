@@ -73,6 +73,9 @@ void gWindow::redrawBalls()
 
     for(auto i : balls)
     {
+        QTransform btransf;
+        btransf.translate(i->getPos().x, i->getPos().y);
+        ballBrush->setTransform(btransf);
         group_blocks->addToGroup(scene->addRect(i->getPos().x, i->getPos().y, i->getSize().x, i->getSize().y, nonePen, *ballBrush));
         group_blocks->childItems()[group_blocks->childItems().size()-1]->setZValue(10);
     }
