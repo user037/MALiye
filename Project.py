@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import filedialog as fd
 gridlenght = 25
-types = [[1, 'blue'], [2, 'red']]
+types = [[1, 'blue'], [2, 'red'], [3, 'yellow'], [4, 'orange'], [5, 'black']]
 curtype = 0
 
 
@@ -10,7 +10,6 @@ def draw(n, m):
     w.destroy()
     root.configure(bg='white')
     root.geometry(str(gridlenght * 2 * m + 100) + 'x' + str(gridlenght * n))  # window geometry
-    root.resizable(0, 0)
 
     w = Canvas(root, height=gridlenght * n, width=gridlenght * 2 * m)  # canvas for drawing and binds for mouse events
     w.bind('<Button-1>', callbackl)
@@ -27,7 +26,7 @@ def draw(n, m):
         for j in range(m):
             print(grid[i][j], end=' ')
             if grid[i][j] != 0:
-                color = types[curtype][1]
+                color = types[grid[i][j] - 1][1]
             else:
                 color = 'white'
 
@@ -173,9 +172,12 @@ def destroywindow():
 
 def thelp():
     help = Tk()
-    help.geometry('500x500')
-    label = Label(help, text='Test')
-    label.pack()
+    help.geometry('450x100')
+    label = Label(help, text='Holding lmb will fill tile with current type \n (Rectangle on the ' +
+                             'right lets you know your current type) \n' +
+                             'You can switch types using right and left arrow keys \n' +
+                             'Rmb will clear tiles and middle button will clear the entire screen')
+    label.place(x=0, y=0)
 
 
 def clear(event):
@@ -212,6 +214,7 @@ if __name__ == '__main__':
     grid = [[0 for i in range(10)] for j in range(10)]  # grid of blocks
     root = Tk()
     root.title(string='Arkanoid 3000 editor')
+    root.resizable(0, 0)
 
     new = Button(text='New', command=newopen)
     new.pack()
