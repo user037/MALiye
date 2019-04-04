@@ -74,6 +74,11 @@ def filedialopen():
 def filedialwrite():
     global grid, n, m
     file_name = fd.asksaveasfilename(filetypes=(("Level files", "*.lvl"), ("All files", "*.*")))
+    if file_name[len(file_name) - 4:len(file_name)] == '.lvl':
+        file_name = file_name[:len(file_name) - 4]
+
+    file_name += '.lvl'
+
     out = open(file_name, 'w')
     print(n, m, file=out)
     for i in range(n):
@@ -111,7 +116,11 @@ def fileopen():
     window()
 
 
-def receive(event):
+def receive1(event):
+    receive()
+
+
+def receive():
     global n, m, grid
     send.destroy()
     label.destroy()
@@ -144,7 +153,7 @@ def newopen():
     label = Label(text='n, m через пробел', height=3)
     label.pack()
 
-    entry.bind('<Return>', receive)
+    entry.bind('<Return>', receive1)
     entry.focus_force()
 
     global send
