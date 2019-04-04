@@ -169,7 +169,6 @@ def newopen():
 
 def destroywindow():
     root.destroy()
-    quit()
 
 
 def thelp():
@@ -210,7 +209,8 @@ def drawcur():
     c.create_rectangle(0, 0, 50, 50, fill=types[curtype][1])
 
 
-if __name__ == '__main__':
+def main():
+    global n, m, std, grid, root, new, file, quitbutton, w, c
     std = 'Arkanoid 3000 editor'
     n = 10
     m = 10
@@ -232,3 +232,7 @@ if __name__ == '__main__':
     c = Canvas()
 
     root.mainloop()
+
+
+if __name__ == '__main__':
+    main()
