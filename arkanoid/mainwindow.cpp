@@ -5,7 +5,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    qApp->setKeyboardInputInterval(10);
     ui->setupUi(this);
     this->setWindowTitle("Arkanoid-3000.");
 
@@ -32,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     tmr = new QTimer();
     connect(tmr, SIGNAL(timeout()), this, SLOT(theDamnLoop()));
     qDebug() << "Sent Signal!";
-    tmr->setInterval(25);
+    tmr->setInterval(15);
     tmr->start();
     qDebug() << "Right NoW!";
 }
@@ -53,7 +52,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
         {
             plate_dir = -1;
         }
-        if(keys[40])// Right
+        else if(keys[40])// Right
         {
             plate_dir = 1;
         }
@@ -67,12 +66,21 @@ void MainWindow::keyReleaseEvent(QKeyEvent *e)
         keys[e->nativeScanCode()] = 0;
     }
 
-
     //release
     if(e->isAutoRepeat() == 0)
     {
         if(!keys[38] && !keys[40])
             plate_dir = 0;
+        else {
+            if(keys[38])// Right
+            {
+                plate_dir = -1;
+            }
+            else if(keys[40])// Right
+            {
+                plate_dir = 1;
+            }
+        }
     }
 }
 
