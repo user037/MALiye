@@ -15,6 +15,7 @@ def draw(n, m):
     w.bind("<Button1-Motion>", callbackl)
     w.bind('<Button-3>', callbackr)
     w.bind("<Button3-Motion>", callbackr)
+    w.bind('<Button-2>', clear)
 
     w.place(x=0, y=0)
 
@@ -110,11 +111,21 @@ def fileopen():
     window()
 
 
-def receive():
+def receive(event):
     global n, m, grid
     send.destroy()
     label.destroy()
     n, m = map(int, entry.get().split())
+    if m > 20:
+        m = 20
+    elif m <= 0:
+        m = 1
+
+    if n > 25:
+        n = 25
+    elif n <= 0:
+        n = 1
+
     entry.destroy()
     grid = [[0 for i in range(m)] for j in range(n)]
     window()
@@ -133,6 +144,9 @@ def newopen():
     label = Label(text='n, m через пробел', height=3)
     label.pack()
 
+    entry.bind('<Return>', receive)
+    entry.focus_force()
+
     global send
     send = Button(text='Send', command=receive)
     send.pack()
@@ -148,6 +162,12 @@ def thelp():
     help.geometry('500x500')
     label = Label(help, text='Test')
     label.pack()
+
+
+def clear(event):
+    global n, m, grid
+    grid = [[0 for i in range(m)] for j in range(n)]
+    draw(n, m)
 
 
 if __name__ == '__main__':
