@@ -20,7 +20,7 @@ def main():
 
     ccolor = (0, 128, 255)
 
-    ball = pygame.Rect(200, 180, 30, 30)
+    ball = pygame.Rect(200, y1 - 120, 30, 30)
     ballvelx = -3
     ballvely = -3
     ballcolor = (255, 100, 0)
@@ -29,7 +29,7 @@ def main():
     screen = pygame.display.set_mode((x1, y1))
     done = False
 
-    platform = pygame.Rect(175, 270, 50, 10)
+    platform = pygame.Rect(175, y1 - 30, 50, 10)
     platformcolor = (150, 90, 140)
 
     clock = pygame.time.Clock()
@@ -67,6 +67,8 @@ def main():
 
                 if coll:
                     rectangles[i] = 0
+                    if rectangles == [0] * len(rectangles):
+                        quit()
                     ball.x += ballvelx
                     ball.y += ballvely
                 else:
@@ -88,6 +90,8 @@ def main():
         if ball.y < 0:
             ball.y = 0
             ballvely = -ballvely
+        elif ball.y > y1 - ball.width:
+            quit()
 
         pygame.draw.rect(screen, ballcolor, ball)
 
@@ -100,11 +104,15 @@ def openfile():
     file_name = fd.askopenfilename(filetypes=(("Level files", "*.lvl"), ("All files", "*.*")))
     inp = open(file_name)
     n, m = map(int, inp.readline().rstrip().split())
-    s = inp.readline().rstrip()
+    s = inp.readline().rstrip().split()
 
-    while s:
-        rectangles.append(list(map(int, s.split())))
-        s = inp.readline().rstrip()
+    for i in range(n):
+        for j in range(m):
+            if s[j] == '0':
+                rectangles.append(0)
+            else:
+                rectangles.append(pygame.Rect(j * 31, i * 16, 30, 15))
+        s = inp.readline().rstrip().split()
 
     inp.close()
     main()
