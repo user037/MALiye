@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import filedialog as fd
 gridlenght = 25
+types = [[1, 'blue'], [2, 'red'], [3, 'yellow'], [4, 'orange'], [5, 'black']]
+curtype = 0
 
 
 def draw(n, m):
@@ -8,21 +10,23 @@ def draw(n, m):
     w.destroy()
     root.configure(bg='white')
     root.geometry(str(gridlenght * 2 * m + 100) + 'x' + str(gridlenght * n))  # window geometry
-    root.resizable(0, 0)
 
     w = Canvas(root, height=gridlenght * n, width=gridlenght * 2 * m)  # canvas for drawing and binds for mouse events
     w.bind('<Button-1>', callbackl)
     w.bind("<Button1-Motion>", callbackl)
     w.bind('<Button-3>', callbackr)
     w.bind("<Button3-Motion>", callbackr)
+    w.bind('<Button-2>', clear)
+    root.bind("<Key-Right>", keycheckr)
+    root.bind('<Key-Left>', keycheckl)
 
     w.place(x=0, y=0)
 
     for i in range(n):
         for j in range(m):
             print(grid[i][j], end=' ')
-            if grid[i][j] == 1:
-                color = 'blue'
+            if grid[i][j] != 0:
+                color = types[grid[i][j] - 1][1]
             else:
                 color = 'white'
 
@@ -33,18 +37,18 @@ def draw(n, m):
 
 def callbackl(event):
     global grid
-    if event.x // (2 * gridlenght) < m * 2 and event.y // gridlenght < n:
+    if event.x // (2 * gridlenght) < m and event.y // gridlenght < n:
         w.create_rectangle((event.x // (gridlenght * 2)) * 2 * gridlenght, (event.y // gridlenght) * gridlenght,
                            (event.x // (gridlenght * 2)) * 2 * gridlenght + 2 * gridlenght,
-                           (event.y // gridlenght) * gridlenght + gridlenght, fill='blue')
-        grid[(event.y // gridlenght)][(event.x // (2 * gridlenght))] = 1
+                           (event.y // gridlenght) * gridlenght + gridlenght, fill=types[curtype][1])
+        grid[(event.y // gridlenght)][(event.x // (2 * gridlenght))] = types[curtype][0]
 
         print('\n'.join(map(str, grid)))
         print("clicked at", event.x, event.y)
 
 
 def callbackr(event):
-    if event.x // (2 * gridlenght) < m * 2 and event.y // gridlenght < n:
+    if event.x // (2 * gridlenght) < m and event.y // gridlenght < n:
         w.create_rectangle((event.x // (gridlenght * 2)) * 2 * gridlenght, (event.y // gridlenght) * gridlenght,
                            (event.x // (gridlenght * 2)) * 2 * gridlenght + 2 * gridlenght,
                            (event.y // gridlenght) * gridlenght + gridlenght, fill='white')
@@ -58,6 +62,8 @@ def filedialopen():
     global grid, n, m
     file_name = fd.askopenfilename(filetypes=(("Level files", "*.lvl"), ("All files", "*.*")))
     inp = open(file_name)
+    root.title(string=std + ' - ' + file_name)
+
     n, m = map(int, inp.readline().rstrip().split())
 
     s = inp.readline().rstrip()
@@ -73,6 +79,11 @@ def filedialopen():
 def filedialwrite():
     global grid, n, m
     file_name = fd.asksaveasfilename(filetypes=(("Level files", "*.lvl"), ("All files", "*.*")))
+    if file_name[len(file_name) - 4:len(file_name)] == '.lvl':
+        file_name = file_name[:len(file_name) - 4]
+
+    file_name += '.lvl'
+
     out = open(file_name, 'w')
     print(n, m, file=out)
     for i in range(n):
@@ -88,6 +99,7 @@ def window():
     file.destroy()
 
     draw(n, m)
+    drawcur()
 
     menubar = Menu(root)  # menu for handling of files
     filemenu = Menu(menubar, tearoff=0)
@@ -110,11 +122,25 @@ def fileopen():
     window()
 
 
+def receive1(event):
+    receive()
+
+
 def receive():
     global n, m, grid
     send.destroy()
     label.destroy()
     n, m = map(int, entry.get().split())
+    if m > 20:
+        m = 20
+    elif m <= 0:
+        m = 1
+
+    if n > 25:
+        n = 25
+    elif n <= 0:
+        n = 1
+
     entry.destroy()
     grid = [[0 for i in range(m)] for j in range(n)]
     window()
@@ -133,6 +159,9 @@ def newopen():
     label = Label(text='n, m через пробел', height=3)
     label.pack()
 
+    entry.bind('<Return>', receive1)
+    entry.focus_force()
+
     global send
     send = Button(text='Send', command=receive)
     send.pack()
@@ -145,17 +174,50 @@ def destroywindow():
 
 def thelp():
     help = Tk()
-    help.geometry('500x500')
-    label = Label(help, text='Test')
-    label.pack()
+    help.geometry('450x100')
+    label = Label(help, text='Holding lmb will fill tile with current type \n (Rectangle on the ' +
+                             'right lets you know your current type) \n' +
+                             'You can switch types using right and left arrow keys \n' +
+                             'Rmb will clear tiles and middle button will clear the entire screen')
+    label.place(x=0, y=0)
+
+
+def clear(event):
+    global n, m, grid
+    grid = [[0 for i in range(m)] for j in range(n)]
+    draw(n, m)
+
+
+def keycheckr(event):
+    global curtype
+    if curtype < len(types) - 1:
+        curtype += 1
+        drawcur()
+
+
+def keycheckl(event):
+    global curtype
+    if curtype > 0:
+        curtype -= 1
+        drawcur()
+
+
+def drawcur():
+    global c
+    c.destroy()
+    c = Canvas(root, height=50, width=50)
+    c.pack(side='right')
+    c.create_rectangle(0, 0, 50, 50, fill=types[curtype][1])
 
 
 if __name__ == '__main__':
+    std = 'Arkanoid 3000 editor'
     n = 10
     m = 10
     grid = [[0 for i in range(10)] for j in range(10)]  # grid of blocks
     root = Tk()
-    root.title(string='Arkanoid 3000 editor')
+    root.title(string=std)
+    root.resizable(0, 0)
 
     new = Button(text='New', command=newopen)
     new.pack()
@@ -167,4 +229,6 @@ if __name__ == '__main__':
     quitbutton.pack()
 
     w = Canvas()
+    c = Canvas()
+
     root.mainloop()
