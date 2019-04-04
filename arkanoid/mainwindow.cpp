@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -91,7 +93,7 @@ void MainWindow::theDamnLoop()
     ui->graphicsView->platf->move(plate_dir);
     for(int i = 0; i < ui->graphicsView->ballsCount(); i++)
     {
-        /*bool collided;
+        bool collided;
         for(auto j: ui->graphicsView->group_balls->collidingItems())
         {
             if(ui->graphicsView->hasInBricks(*j))
@@ -99,10 +101,29 @@ void MainWindow::theDamnLoop()
                 collided = 1;
             }
         }
-        if(collided || !ui->graphicsView->isBallInBound(ui->graphicsView->getBall(i)));
-        ui->graphicsView->getBall(i)->move();*/
-        ui->graphicsView->isBallInBound(ui->graphicsView->getBall(i));
-        ui->graphicsView->getBall(i)->move();
+        ball *b = ui->graphicsView->getBall(i);
+        if(collided)
+        {
+
+        }
+        int isInBound = ui->graphicsView->isBallInBound(b);
+        if(isInBound == 1)
+        {
+            b->changeDir({-b->getVelocity().x, b->getVelocity().y});
+        }
+        if(isInBound == 2)
+        {
+            b->changeDir({b->getVelocity().x, -b->getVelocity().y});
+        }
+        if(isInBound == 3)
+        {
+            b->changeDir({-b->getVelocity().x, b->getVelocity().y});
+        }
+        if(isInBound == 4)
+        {
+            b->changeDir({b->getVelocity().x, -b->getVelocity().y});
+        }
+        b->move();
     }
     ui->graphicsView->totalRedraw();
 }

@@ -92,22 +92,18 @@ int gWindow::isBallInBound(ball *item) //0 - in bound, 1 - left wall, ..., 4 - b
 {
     if(item->getPos().x < 0)
     {
-        item->changeDir({-item->getVelocity().x, item->getVelocity().y});
         return 1;
     }
     if(item->getPos().y < 0)
     {
-        item->changeDir({item->getVelocity().x, -item->getVelocity().y});
         return 2;
     }
     if(item->getPos().x > 750)
     {
-        item->changeDir({-item->getVelocity().x, item->getVelocity().y});
         return 3;
     }
     if(item->getPos().y > 550)
     {
-        item->changeDir({item->getVelocity().x, -item->getVelocity().y});
         return 4;
     }
     return 0;
