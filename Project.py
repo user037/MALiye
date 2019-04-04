@@ -7,12 +7,15 @@ def draw(n, m):
     global w, grid
     w.destroy()
     root.configure(bg='white')
-    root.geometry(str(gridlenght * m + 100) + 'x' + str(gridlenght * n + 200))  # window geometry
+    root.geometry(str(gridlenght * 2 * m + 100) + 'x' + str(gridlenght * n))  # window geometry
     root.resizable(0, 0)
 
-    w = Canvas(root, height=gridlenght * n, width=gridlenght * m)  # canvas for drawing and binds for mouse events
-    w.bind("<Button-1>", callbackl)
+    w = Canvas(root, height=gridlenght * n, width=gridlenght * 2 * m)  # canvas for drawing and binds for mouse events
+    w.bind('<Button-1>', callbackl)
+    w.bind("<Button1-Motion>", callbackl)
     w.bind('<Button-3>', callbackr)
+    w.bind("<Button3-Motion>", callbackr)
+
     w.place(x=0, y=0)
 
     for i in range(n):
@@ -23,29 +26,29 @@ def draw(n, m):
             else:
                 color = 'white'
 
-            w.create_rectangle(j * gridlenght, i * gridlenght, j * gridlenght + gridlenght, i * gridlenght + gridlenght,
-                               fill=color)  # grid
+            w.create_rectangle(j * 2 * gridlenght, i * gridlenght, j * 2 * gridlenght + 2 * gridlenght,
+                               i * gridlenght + gridlenght, fill=color)  # grid
         print()
 
 
 def callbackl(event):
     global grid
-    if event.x // gridlenght < m and event.y // gridlenght < n:
-        w.create_rectangle((event.x // gridlenght) * gridlenght, (event.y // gridlenght) * gridlenght,
-                           (event.x // gridlenght) * gridlenght + gridlenght,
+    if event.x // (2 * gridlenght) < m * 2 and event.y // gridlenght < n:
+        w.create_rectangle((event.x // (gridlenght * 2)) * 2 * gridlenght, (event.y // gridlenght) * gridlenght,
+                           (event.x // (gridlenght * 2)) * 2 * gridlenght + 2 * gridlenght,
                            (event.y // gridlenght) * gridlenght + gridlenght, fill='blue')
-        grid[(event.y // gridlenght)][(event.x // gridlenght)] = 1
+        grid[(event.y // gridlenght)][(event.x // (2 * gridlenght))] = 1
 
         print('\n'.join(map(str, grid)))
         print("clicked at", event.x, event.y)
 
 
 def callbackr(event):
-    if event.x // gridlenght < m and event.y // gridlenght < n:
-        w.create_rectangle((event.x // gridlenght) * gridlenght, (event.y // gridlenght) * gridlenght,
-                           (event.x // gridlenght) * gridlenght + gridlenght,
+    if event.x // (2 * gridlenght) < m * 2 and event.y // gridlenght < n:
+        w.create_rectangle((event.x // (gridlenght * 2)) * 2 * gridlenght, (event.y // gridlenght) * gridlenght,
+                           (event.x // (gridlenght * 2)) * 2 * gridlenght + 2 * gridlenght,
                            (event.y // gridlenght) * gridlenght + gridlenght, fill='white')
-        grid[(event.y // gridlenght)][(event.x // gridlenght)] = 0
+        grid[(event.y // gridlenght)][(event.x // (2 * gridlenght))] = 0
 
         print('\n'.join(map(str, grid)))
         print("clicked at", event.x, event.y)
@@ -92,12 +95,16 @@ def window():
     filemenu.add_command(label='Save', command=filedialwrite)
     menubar.add_cascade(label='File', menu=filemenu)
 
+    menubar.add_command(label='Help', command=thelp)
+    menubar.add_command(label='Quit', command=destroywindow)
+
     root.config(menu=menubar)
 
 
 def fileopen():
     new.destroy()
     file.destroy()
+    quitbutton.destroy()
 
     filedialopen()
     window()
@@ -116,6 +123,7 @@ def receive():
 def newopen():
     new.destroy()
     file.destroy()
+    quitbutton.destroy()
 
     global entry
     entry = Entry()
@@ -130,11 +138,24 @@ def newopen():
     send.pack()
 
 
+def destroywindow():
+    root.destroy()
+    quit()
+
+
+def thelp():
+    help = Tk()
+    help.geometry('500x500')
+    label = Label(help, text='Test')
+    label.pack()
+
+
 if __name__ == '__main__':
     n = 10
     m = 10
     grid = [[0 for i in range(10)] for j in range(10)]  # grid of blocks
     root = Tk()
+    root.title(string='Arkanoid 3000 editor')
 
     new = Button(text='New', command=newopen)
     new.pack()
@@ -142,5 +163,8 @@ if __name__ == '__main__':
     file = Button(text='Open', command=fileopen)
     file.pack()
 
+    quitbutton = Button(text='Quit', command=destroywindow)
+    quitbutton.pack()
+
     w = Canvas()
-    mainloop()
+    root.mainloop()
