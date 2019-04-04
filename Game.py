@@ -75,7 +75,20 @@ def main():
                     pygame.draw.rect(screen, ccolor, rectangles[i])
 
         if ball.move(ballvelx, ballvely).colliderect(platform):
-            ballvely = -ballvely
+            coll = False
+            c = ball.move(ballvelx, 0)
+            if c.colliderect(platform):
+                ballvelx = -ballvelx
+                coll = True
+
+            c = ball.move(0, ballvely)
+            if c.colliderect(platform):
+                ballvely = -ballvely
+                coll = True
+
+            if coll:
+                ball.x += ballvelx
+                ball.y += ballvely
 
         ball.x += ballvelx
         ball.y += ballvely
