@@ -1,11 +1,11 @@
 #include "brick.h"
 
-QRectF brick::boundingRect() const
+QRectF brick::boundingRect() const //for compatibility
 {
 
 }
 
-void brick::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void brick::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) //for compatibility
 {
 
 }

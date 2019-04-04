@@ -6,6 +6,7 @@
 #include <QGraphicsItem>
 #include <tools.h>
 #include <brick.h>
+#include <ball.h>
 #include <platform.h>
 #include <QDebug>
 
@@ -17,18 +18,25 @@ public:
 
     void addBrick(point pos, point sz, int id);
     void addPlatform();
+    void addBall(point pos, point size, point init_vel);
     void redrawBricks();
+    void redrawBalls();
     void redrawPlatform(); //plate = platform
     void totalRedraw();
     int bricksCount();
+    int ballsCount();
+    int isBallInBound(ball *item);
+    bool hasInBricks(QGraphicsItem &it);
     brick* getBrick(int i);
+    ball* getBall(int i);
     platform *platf;
-private:
-    QGraphicsScene *scene;
     QGraphicsItemGroup *group_blocks;
     QGraphicsItemGroup *group_plate;
     QGraphicsItemGroup *group_balls;
+    QGraphicsScene *scene;
+private:
     QVector < brick* > bricks;
+    QVector < ball* > balls;
     QPen brickPen;
 signals:
 

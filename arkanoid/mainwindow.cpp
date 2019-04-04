@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         keys.push_back(0);
     }
-
+    ui->graphicsView->addBall({500,500},{50,50},{-5,-10});
     for(int i = 1; i <= 6; i++)
     {
         for(int j = 1; j <= 5; j++)
@@ -89,5 +89,22 @@ void MainWindow::theDamnLoop()
     //for(int i = 0; i < ui->graphicsView->bricksCount(); i++)
     //ui->graphicsView->getBrick(i)->setPos({ui->graphicsView->getBrick(i)->getPos().x + 5,ui->graphicsView->getBrick(i)->getPos().y});
     ui->graphicsView->platf->move(plate_dir);
+    for(int i = 0; i < ui->graphicsView->ballsCount(); i++)
+    {
+        /*bool collided;
+        for(auto j: ui->graphicsView->group_balls->collidingItems())
+        {
+            if(ui->graphicsView->hasInBricks(*j))
+            {
+                collided = 1;
+            }
+        }
+        if(collided || !ui->graphicsView->isBallInBound(ui->graphicsView->getBall(i)));
+        ui->graphicsView->getBall(i)->move();*/
+        ui->graphicsView->isBallInBound(ui->graphicsView->getBall(i));
+        ui->graphicsView->getBall(i)->move();
+    }
     ui->graphicsView->redrawPlatform();
+    ui->graphicsView->redrawBricks();
+    ui->graphicsView->redrawBalls();
 }

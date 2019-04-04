@@ -7,6 +7,7 @@
 class brick : public QGraphicsItem
 {
 public:
+    QString getClass() {return "brick";}
     point getPos();
     point getSize();
     int getId();
@@ -17,8 +18,8 @@ private:
     point pos;
     point size;
     int id;
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
+    QRectF boundingRect() const; //for compatibility
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr); //for compatibility
 
 };
 
