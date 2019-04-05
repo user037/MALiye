@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         for(int j = 1; j <= 5; j++)
         {
-            ui->graphicsView->addBrick({105.0*i-25,55.0*j},{100,50},1);
+            ui->graphicsView->addBrick({105.0*i-25,55.0*j},{100,50},5);
         }
     }
     ui->graphicsView->addPlayer();

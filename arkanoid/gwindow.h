@@ -40,12 +40,16 @@ public:
     player *pl;
     platform *platf;
 private:
+    QImage *brickTexture;
+    QImage *plateTexture;
+    QImage *ballTexture;
     QVector < brick* > bricks;
     QVector < ball* > balls;
     QPen nonePen;
     QBrush *plateBrush;
     QBrush *ballBrush;
     QBrush *brickBrush;
+    QVector < QColor > brickColor;
 signals:
 
 public slots:

@@ -1,7 +1,40 @@
 #include "gwindow.h"
 
+    QColor midColor(QColor a, QColor b)
+    {
+        QColor out((a.red()*b.red())/256,(a.green()*b.green())/256,(a.blue()*b.blue())/256);
+        return out;
+    }
+
+    QColor mixColor(QColor a, QColor b)
+    {
+        QColor out((a.red()+b.red())/2,(a.green()+b.green())/2,(a.blue()+b.blue())/2);
+        return out;
+    }
+
+    QImage colorImage(QImage *src, QColor col)
+{
+    QImage img = *src;
+    for(int y = 0; y < src->height(); y++)
+    {
+        for(int x = 0; x < src->width(); x++)
+        {
+            img.setPixelColor(x,y,midColor(img.pixel(x,y),col.rgb()));
+        }
+    }
+    return img;
+}
+
 gWindow::gWindow(QWidget *parent) : QGraphicsView(parent)
 {
+    brickColor.resize(6); //Initializing color list
+    brickColor[1] = Qt::white; //not rendering [0]
+    brickColor[1] = mixColor(Qt::blue,mixColor(Qt::blue,Qt::white));
+    brickColor[2] = Qt::red;
+    brickColor[3] = Qt::yellow;
+    brickColor[4] = mixColor(Qt::red,Qt::yellow); //orange
+    brickColor[5] = Qt::green;
+
     scene = new QGraphicsScene();
     group_bg = new QGraphicsItemGroup();
     group_blocks = new QGraphicsItemGroup();
@@ -11,21 +44,22 @@ gWindow::gWindow(QWidget *parent) : QGraphicsView(parent)
     scene->addItem(group_plate);
     scene->addItem(group_balls);
     scene->addItem(group_bg);
+    group_plate->setFlag(QGraphicsItem::ItemNegativeZStacksBehindParent);
+    group_bg->setFlag(QGraphicsItem::ItemNegativeZStacksBehindParent);
     group_bg->setZValue(-10);
     QBrush blackBrush(Qt::black);
     QPen blackPen(Qt::black);
     group_bg->addToGroup(scene->addRect(0,0,1000,1000,blackPen,blackBrush));
-    group_balls->setZValue(10);
     this->setScene(scene);
 
-    QImage plateTexture(QDir::currentPath() + "/../arkanoid/img/panel.bmp");
-    QImage ballTexture(QDir::currentPath() + "/../arkanoid/img/ball.bmp");
-    QImage brickTexture(QDir::currentPath() + "/../arkanoid/img/brick-base.bmp");
+    plateTexture = new QImage(QDir::currentPath() + "/../arkanoid/img/panel.bmp");
+    ballTexture = new QImage(QDir::currentPath() + "/../arkanoid/img/ball.bmp");
+    brickTexture = new QImage(QDir::currentPath() + "/../arkanoid/img/brick-base.bmp");
     qDebug() << QDir::currentPath();
 
-    plateBrush = new QBrush(plateTexture);
-    ballBrush = new QBrush(ballTexture);
-    brickBrush = new QBrush(brickTexture);
+    plateBrush = new QBrush(*plateTexture);
+    ballBrush = new QBrush(*ballTexture);
+    brickBrush = new QBrush(*brickTexture);
     nonePen.setColor(Qt::black);
     nonePen.setWidth(-1);
 }
@@ -64,7 +98,10 @@ void gWindow::redrawBricks()
             QTransform btransf;
             btransf.translate(i->getPos().x, i->getPos().y);
             brickBrush->setTransform(btransf);
+            QBrush tmpBrush = *brickBrush;
+            brickBrush->setTextureImage(colorImage(brickTexture ,brickColor[i->getId()]));
             group_blocks->addToGroup(scene->addRect(i->getPos().x, i->getPos().y, i->getSize().x, i->getSize().y, nonePen,*brickBrush));
+            group_blocks->childItems()[group_blocks->childItems().size()-1]->setZValue(3);
         }
     }
 }
@@ -84,7 +121,6 @@ void gWindow::redrawBalls()
         group_blocks->addToGroup(scene->addRect(i->getPos().x, i->getPos().y, i->getSize().x, i->getSize().y, nonePen, *ballBrush));
         group_blocks->childItems()[group_blocks->childItems().size()-1]->setZValue(10);
     }
-    group_balls->setZValue(10);
 }
 
 void gWindow::redrawPlatform()
@@ -95,11 +131,14 @@ void gWindow::redrawPlatform()
     }
     group_plate->addToGroup(scene->addRect(0, 0, this->platf->getSize().x, this->platf->getSize().y, nonePen));
     group_plate->addToGroup(scene->addRect(0, 0, this->platf->getSize().x + 40, this->platf->getSize().y + 40, nonePen,*plateBrush));
-    this->plateBrush->setTransform(group_plate->childItems()[0]->transform());
+    QTransform tmpTransf = group_plate->childItems()[0]->transform();
+    tmpTransf.scale(1,0.80);
+    this->plateBrush->setTransform(tmpTransf);
     group_plate->childItems()[0]->setPos(this->platf->getPos().x, this->platf->getPos().y);
     group_plate->childItems()[1]->setPos(this->platf->getPos().x - 20, this->platf->getPos().y - 20);
-    group_blocks->childItems()[0]->setZValue(0);
-    group_blocks->childItems()[1]->setZValue(5);
+    group_blocks->childItems()[0]->setZValue(1);
+    group_blocks->childItems()[1]->setFlag(QGraphicsItem::ItemNegativeZStacksBehindParent);
+    group_blocks->childItems()[1]->setZValue(-5);
 }
 
 void gWindow::totalRedraw()
