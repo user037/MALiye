@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import filedialog as fd
 gridlenght = 25
-types = [[1, 'blue'], [2, 'red'], [3, 'yellow'], [4, 'orange'], [5, 'black']]
+types = [[1, 'blue'], [2, 'red'], [3, 'yellow'], [4, 'orange'], [5, 'green']]
 curtype = 0
 
 
