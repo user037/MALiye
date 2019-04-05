@@ -10,6 +10,8 @@
 #include <player.h>
 #include <platform.h>
 #include <QDebug>
+#include <QFont>
+#include <QFontDatabase>
 #include <QDir>
 
 class gWindow : public QGraphicsView
@@ -40,6 +42,7 @@ public:
     player *pl;
     platform *platf;
 private:
+    QGraphicsSimpleTextItem *score;
     QImage *brickTexture;
     QImage *plateTexture;
     QImage *ballTexture;

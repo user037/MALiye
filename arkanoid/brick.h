@@ -14,8 +14,11 @@ public:
     brick(point pos, point sz, int id, QGraphicsItem *parent = nullptr);
     void setPos(point newPos);
     void hit();
+    void setPrice(int price);
+    int getPrice();
 private:
     point pos;
+    int price;
     point size;
     int id;
     QRectF boundingRect() const; //for compatibility
