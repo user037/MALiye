@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    QFile fin("level.txt");
+
     ui->setupUi(this);
     this->setWindowTitle("Arkanoid-3000.");
 
@@ -26,11 +28,14 @@ MainWindow::MainWindow(QWidget *parent) :
         keys.push_back(0);
     }
     ui->graphicsView->addBall({400,400},{50,50},{-1,-3});
+
     for(int i = 1; i <= 6; i++)
     {
         for(int j = 1; j <= 5; j++)
         {
-            ui->graphicsView->addBrick({105.0*i-25,55.0*j},{100,50},5);
+            QByteArray line = fin.readLine();
+
+            ui->graphicsView->addBrick({105.0*i-25,55.0*j},{100,50},);
         }
     }
     ui->graphicsView->addPlayer();

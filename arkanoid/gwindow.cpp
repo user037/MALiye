@@ -28,7 +28,7 @@
 gWindow::gWindow(QWidget *parent) : QGraphicsView(parent)
 {
     brickColor.resize(6); //Initializing color list
-    brickColor[1] = Qt::white; //not rendering [0]
+    brickColor[0] = Qt::white; //not rendering [0]
     brickColor[1] = mixColor(Qt::blue,mixColor(Qt::blue,Qt::white));
     brickColor[2] = Qt::red;
     brickColor[3] = Qt::yellow;

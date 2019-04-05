@@ -11,6 +11,7 @@
 #include <bits/stdc++.h>
 #include <QDebug>
 #include <QDir>
+#include <QFile>
 
 namespace Ui {
 class MainWindow;
