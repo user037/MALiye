@@ -44,3 +44,13 @@ void brick::hit()
         this->id = this->id - 1;
     }
 }
+
+void brick::setPrice(int price)
+{
+    this->price = price;
+}
+
+int brick::getPrice()
+{
+    return this->price;
+}
