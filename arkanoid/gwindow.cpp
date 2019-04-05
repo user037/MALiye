@@ -27,6 +27,15 @@
 
 gWindow::gWindow(QWidget *parent) : QGraphicsView(parent)
 {
+    score = new QGraphicsSimpleTextItem("SCORE: 0");
+    score->setPos(25,25);
+    score->setBrush(QBrush(Qt::white));
+    QFontDatabase::addApplicationFont(QDir::currentPath() + "/../arkanoid/res/PressStart2P.ttf");
+    QFont font("PressStart2P");
+    font.setWeight(16);
+    score->setFont(font);
+    score->setZValue(1000);
+
     brickColor.resize(6); //Initializing color list
     brickColor[1] = Qt::white; //not rendering [0]
     brickColor[1] = mixColor(Qt::blue,mixColor(Qt::blue,Qt::white));
@@ -44,6 +53,7 @@ gWindow::gWindow(QWidget *parent) : QGraphicsView(parent)
     scene->addItem(group_plate);
     scene->addItem(group_balls);
     scene->addItem(group_bg);
+    scene->addItem(score);
     group_plate->setFlag(QGraphicsItem::ItemNegativeZStacksBehindParent);
     group_bg->setFlag(QGraphicsItem::ItemNegativeZStacksBehindParent);
     group_bg->setZValue(-10);
