@@ -13,8 +13,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    QFile fin("level.txt");
-
     ui->setupUi(this);
     this->setWindowTitle("Arkanoid-3000.");
 
@@ -33,9 +31,8 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         for(int j = 1; j <= 5; j++)
         {
-            QByteArray line = fin.readLine();
-
-            ui->graphicsView->addBrick({105.0*i-25,55.0*j},{100,50},);
+            ui->graphicsView->addBrick({105.0*i-25,55.0*j},{100,50}, 5);
+            ui->graphicsView->getBrick(ui->graphicsView->bricksCount()-1)->setPrice(ui->graphicsView->getBrick(ui->graphicsView->bricksCount()-1)->getId() * 100);
         }
     }
     ui->graphicsView->addPlayer();
@@ -174,28 +171,43 @@ void MainWindow::theDamnLoop()
             {
                 collided = 1;
                 ui->graphicsView->getBrick(j)->hit();
+                if(ui->graphicsView->getBrick(j)->getId() == 0)
+                {
+                    ui->graphicsView->pl->setScore(ui->graphicsView->pl->getCurScore() + ui->graphicsView->getBrick(j)->getPrice());
+                }
                 break;
             }
             if(fabs(b->getPos().y - p3.y) < delta && b->getPos().x < p4.x && b->getPos().x + b->getSize().x > p3.x)
             {
                 collided = 1;
                 ui->graphicsView->getBrick(j)->hit();
+                if(ui->graphicsView->getBrick(j)->getId() == 0)
+                {
+                    ui->graphicsView->pl->setScore(ui->graphicsView->pl->getCurScore() + ui->graphicsView->getBrick(j)->getPrice());
+                }
                 break;
             }
             if(fabs(b->getPos().x + b->getSize().x - p1.x) < delta && b->getPos().y < p3.y && b->getPos().y + b->getSize().y > p1.y)
             {
                 collided = 2;
                 ui->graphicsView->getBrick(j)->hit();
+                if(ui->graphicsView->getBrick(j)->getId() == 0)
+                {
+                    ui->graphicsView->pl->setScore(ui->graphicsView->pl->getCurScore() + ui->graphicsView->getBrick(j)->getPrice());
+                }
                 break;
             }
             if(fabs(b->getPos().x - p2.x) < delta && b->getPos().y < p4.y && b->getPos().y + b->getSize().y > p2.y)
             {
                 collided = 2;
                 ui->graphicsView->getBrick(j)->hit();
+                if(ui->graphicsView->getBrick(j)->getId() == 0)
+                {
+                    ui->graphicsView->pl->setScore(ui->graphicsView->pl->getCurScore() + ui->graphicsView->getBrick(j)->getPrice());
+                }
                 break;
             }
         }
-
         if(collided == 1)
         {
             b->changeDir({b->getVelocity().x, -b->getVelocity().y});

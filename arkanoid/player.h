@@ -15,6 +15,7 @@ public:
     int getLevel();
     player(int curScore, int highScore, int hp, int startHp, int level, QGraphicsItem *parent = nullptr);
     void changeLevel(int newLevel);
+    void setScore(int newScore);
     void death();
     void damage();
 private:

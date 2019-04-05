@@ -133,6 +133,11 @@ void gWindow::redrawBalls()
     }
 }
 
+void gWindow::redrawScore()
+{
+    score->setText("SCORE: " + QString::number(this->pl->getCurScore()));
+}
+
 void gWindow::redrawPlatform()
 {
     for(auto i : group_plate->childItems())
@@ -156,6 +161,7 @@ void gWindow::totalRedraw()
     redrawPlatform();
     redrawBricks();
     redrawBalls();
+    redrawScore();
 }
 
 int gWindow::bricksCount()

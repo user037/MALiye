@@ -26,6 +26,7 @@ public:
     void addBall(point pos, point size, point init_vel);
     void redrawBricks();
     void redrawBalls();
+    void redrawScore();
     void redrawPlatform(); //plate = platform
     void totalRedraw();
     int bricksCount();

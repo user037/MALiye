@@ -49,10 +49,17 @@ void player::changeLevel(int newLevel)
     this->level = newLevel;
 }
 
+void player::setScore(int newScore)
+{
+    this->curScore = newScore;
+}
+
 void player::death()
 {
     qDebug() << "ded :(";
     this->hp = this->startHp;
+    this->highScore = std::max(this->highScore, this->curScore);
+    this->curScore = 0;
 }
 
 void player::damage()
