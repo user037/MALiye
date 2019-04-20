@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         keys.push_back(0);
     }
-    ui->graphicsView->addBall({400,400},{50,50},{-1,-3});
+    ui->graphicsView->addBall({350,400},{50,50},{-1,-3});
 
     for(int i = 1; i <= 6; i++)
     {
@@ -59,6 +59,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
         keys[e->nativeScanCode()] = 1;
 
         //press
+#ifdef __linux__
         if(keys[38]) // Left
         {
             plate_dir = -1;
@@ -67,6 +68,19 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
         {
             plate_dir = 1;
         }
+#elif _WIN32
+        if(keys[30]) // Left
+        {
+            plate_dir = -1;
+        }
+        else if(keys[32])// Right
+        {
+            plate_dir = 1;
+        }
+#else
+
+#endif
+
     }
 }
 
@@ -80,6 +94,8 @@ void MainWindow::keyReleaseEvent(QKeyEvent *e)
     //release
     if(e->isAutoRepeat() == 0)
     {
+
+#ifdef __linux__
         if(!keys[38] && !keys[40])
             plate_dir = 0;
         else {
@@ -91,6 +107,21 @@ void MainWindow::keyReleaseEvent(QKeyEvent *e)
             {
                 plate_dir = 1;
             }
+#elif _WIN32
+        if(!keys[30] && !keys[32])
+            plate_dir = 0;
+        else {
+            if(keys[30])// Right
+            {
+                plate_dir = -1;
+            }
+            else if(keys[32])// Right
+            {
+                plate_dir = 1;
+            }
+#else
+
+#endif
         }
     }
 }

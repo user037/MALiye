@@ -30,8 +30,8 @@ gWindow::gWindow(QWidget *parent) : QGraphicsView(parent)
     score = new QGraphicsSimpleTextItem("SCORE: 0");
     score->setPos(25,25);
     score->setBrush(QBrush(Qt::white));
-    QFontDatabase::addApplicationFont(QDir::currentPath() + "/../arkanoid/res/PressStart2P.ttf");
-    QFont font("PressStart2P");
+    QFontDatabase::addApplicationFont(QDir::currentPath() + "/res/PressStart2P.ttf");
+    QFont font("/res/PressStart2P.ttf");
     font.setWeight(16);
     score->setFont(font);
     score->setZValue(1000);
@@ -62,9 +62,9 @@ gWindow::gWindow(QWidget *parent) : QGraphicsView(parent)
     group_bg->addToGroup(scene->addRect(0,0,1000,1000,blackPen,blackBrush));
     this->setScene(scene);
 
-    plateTexture = new QImage(QDir::currentPath() + "/../arkanoid/img/panel.bmp");
-    ballTexture = new QImage(QDir::currentPath() + "/../arkanoid/img/ball.bmp");
-    brickTexture = new QImage(QDir::currentPath() + "/../arkanoid/img/brick-base.bmp");
+    plateTexture = new QImage(QDir::currentPath() + "/img/panel.bmp");
+    ballTexture = new QImage(QDir::currentPath() + "/img/ball.bmp");
+    brickTexture = new QImage(QDir::currentPath() + "/img/brick-base.bmp");
     qDebug() << QDir::currentPath();
 
     plateBrush = new QBrush(*plateTexture);

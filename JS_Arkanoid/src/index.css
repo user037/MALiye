@@ -1,0 +1,48 @@
+body {
+  background-color: black;
+  color: red;
+  font-family: "Press Start 2P";
+}
+
+#gameScreen {
+  border: 1px solid red;
+  border-radius: 1rem;
+}
+
+#paddleImg {
+  display: none;
+}
+
+#ballImg {
+  display: none;
+}
+
+#score {
+  position: absolute;
+  left: 900px;
+  top: 100px;
+}
+
+#highScore {
+  position: absolute;
+  left: 900px;
+  top: 150px;
+}
+
+#level {
+  position: absolute;
+  left: 900px;
+  top: 200px;
+}
+
+#brickImg3 {
+  display: none;
+}
+
+#brickImg2 {
+  display: none;
+}
+
+#brickImg1 {
+  display: none;
+}
